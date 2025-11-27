@@ -1,0 +1,56 @@
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.oiwujmnh {
+    max-width: 100%;
+}
+
+.lkju82567 {
+    background-color: #000000;
+    font-family: "Inter", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+}
+
+.con1238 {
+    margin: 0 auto;
+    max-width: 79.5rem; /* 1272px */
+}
+
+.gtrewq {
+    display: flex;
+    gap: 28px;
+    align-items: center;
+    /* border: 1px solid #FFF; */
+    border-bottom: 2px solid #818181;
+    padding-block: 58px 45px;
+}
+
+.nav-a123asjqu {
+    display: flex;
+    gap: 28px;
+}
+
+.gtrewq a {
+    background-color: rgba(224, 19, 19, 0.5);
+    text-decoration: none;
+    color: #ffffff;
+    padding: 16px 16px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 900;
+    font-size: 0.75rem; /* 12px */
+}
+
+.oiwujmnh {
+    height: 48px;
+}
+
+.icon-qyshansd {
+    height: 1rem;
+}

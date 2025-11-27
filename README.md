@@ -2,6 +2,8 @@
 
 ## Sistema automotivo - Sistema de serviços e peças de carros
 
+O sistema controla o fluxo de atendimento de uma loja de autopeças, permitindo registrar vendas de peças e ordens de serviço. Ele identifica ou cadastra o cliente, cria a venda ou o serviço conforme a necessidade e registra as peças utilizadas. A cada venda ou serviço realizado, o estoque é automaticamente atualizado com o decréscimo das peças.
+
 ### Como funciona o fluxo de atendimento na loja autopeças?
 
 As 4 perguntas mais importantes do projeto estão abaixo:
@@ -30,4 +32,4 @@ O estoque é o decréscimo ou acréscimo de quantidade das peças da loja de aut
 
 ### O fluxograma abaixo é apenas um esboço (será finalizado até 15 de dezembro de 2025)
 
-![Fluxograma do projeto](../jdm-king-autopecas/assets/fluxograma/Fluxo%20de%20atendimento%20da%20autopeças.png)
+![Fluxograma do projeto](./assets/fluxograma/Fluxo%20de%20atendimento%20da%20autopeças.png)

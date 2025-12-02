@@ -85,7 +85,8 @@
     padding: 34px 32px;
     display: flex;
     flex-direction: column;
-    min-width: 624px;
+    max-width: 624px;
+    width: 100%;
 }
 
 .cartao-container-cliente {

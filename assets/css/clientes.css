@@ -95,8 +95,9 @@
     border-bottom: 2px solid #818181;
 }
 
-.cartao-editar {
-    margin-right: 12px;
+.cartao-editar-excluir {
+    display: flex;
+    gap: 12px;
 }
 
 .cartao-nome {

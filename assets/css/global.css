@@ -14,6 +14,13 @@
     font-family: "Inter", sans-serif;
     font-optical-sizing: auto;
     font-style: normal;
+    margin-inline: 60px;
+}
+
+@media screen and (max-width: 50rem) {
+    .lkju82567 {
+        margin-inline: 12px;
+    }
 }
 
 .con1238 {
@@ -25,8 +32,8 @@
     display: flex;
     gap: 28px;
     align-items: center;
-    border-bottom: 2px solid #818181;
     padding-block: 58px 45px;
+    border-bottom: 2px solid #818181;
 }
 
 .nav-a123asjqu {

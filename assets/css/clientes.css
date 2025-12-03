@@ -76,6 +76,7 @@
 .cartoes {
     margin-block-start: 52px;
     display: flex;
+    flex-wrap: wrap;
     gap: 24px;
 }
 

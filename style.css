@@ -1,7 +1,17 @@
+:root {
+    --h1-font-size: 1.125rem;
+    --h2-font-size: 0.75rem;
+
+    --img-size: clamp(12rem, 1.0526rem + 54.7368vw, 25rem); /* 192px para 400px */
+
+    --container-padding-inline: clamp(0.75rem, -0.25rem + 5vw, 2.25rem); /* 12px para 36px */
+}
+
 *, *::before, *::after {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+    letter-spacing: .05rem;
 }
 
 body {
@@ -10,4 +20,112 @@ body {
     font-style: normal;
     background-color: #000;
     color: #FFF;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 50%;
+    width: 50%;
+    height: 100%;
+    background-image: url("./assets/img/index/bg-foto-motor.png");
+    background-size: cover;
+    background-position: 62% center;
+    background-repeat: no-repeat;
+    z-index: -1;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+.container {
+    margin: 0 auto;
+    max-width: 598px;
+    margin-block: 60px 139px;
+    margin-inline: 25px;
+    padding-block: 36px;
+    padding-inline: clamp(0.75rem, -0.25rem + 5vw, 2.25rem); /* 12px para 36px */
+    background-color: #252525;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 10px;
+}
+
+footer {
+    text-align: center;
+    padding: 12px;
+    font-weight: 900;
+    font-size: 0.875rem;
+    color: #FFF;
+}
+
+h1 {
+    font-size: 1.125rem;
+    font-weight: 900;
+    color: #FFF;
+    margin-block: 20px 16px;
+}
+
+h2 {
+    font-size: 0.75rem;
+    font-weight: 900;
+    color: #818181;
+    text-align: center;
+    margin-block-end: 33px;
+}
+
+img {
+    max-width: 100%;
+    width: var(--img-size);
+    height: auto;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+label {
+    font-size: 1rem;
+    font-weight: 900;
+    color: #FFF;
+}
+
+input {
+    padding: 15px 8px;
+    border-radius: 10px;
+}
+
+input::placeholder {
+    color: #818181;
+    font-weight: 900;
+    font-size: 0.75rem;
+    line-height: 1.5;
+}
+
+input[type="email"], input[type="password"] {
+    font-size: 1rem;
+    border: 1px solid #818181;
+    background-color: transparent;
+    color: #D5CCBD;
+    font-weight: 700;
+}
+
+input[type="submit"] {
+    background-color: rgba(224, 19, 19, 0.502);
+    color: #FFF;
+    font-weight: 700;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.15s ease;
 }

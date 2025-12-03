@@ -1,10 +1,9 @@
 :root {
-    --h1-font-size: 1.125rem;
-    --h2-font-size: 0.75rem;
-
+    --h1-font-size: clamp(1.125rem, 0.5987rem + 2.6316vw, 1.75rem); /* 18px para 28px */
+    --h2-font-size: clamp(0.75rem, 0.5395rem + 1.0526vw, 1rem); /* 12px para 16px */
     --img-size: clamp(12rem, 1.0526rem + 54.7368vw, 25rem); /* 192px para 400px */
-
-    --container-padding-inline: clamp(0.75rem, -0.25rem + 5vw, 2.25rem); /* 12px para 36px */
+    --font-size-button: clamp(0.75rem, 0.5395rem + 1.0526vw, 1rem); /* 12px para 16px */
+    --container-padding-inline: clamp(0.75rem, -0.3026rem + 5.2632vw, 2rem); /* 12px para 32px */
 }
 
 *, *::before, *::after {
@@ -50,7 +49,7 @@ main {
     margin-block: 60px 139px;
     margin-inline: 25px;
     padding-block: 36px;
-    padding-inline: clamp(0.75rem, -0.25rem + 5vw, 2.25rem); /* 12px para 36px */
+    padding-inline: var(--container-padding-inline);
     background-color: #252525;
     display: flex;
     flex-direction: column;
@@ -67,18 +66,19 @@ footer {
 }
 
 h1 {
-    font-size: 1.125rem;
+    font-size: var(--h1-font-size);
     font-weight: 900;
     color: #FFF;
     margin-block: 20px 16px;
 }
 
 h2 {
-    font-size: 0.75rem;
+    font-size: var(--h2-font-size);
     font-weight: 900;
     color: #818181;
     text-align: center;
     margin-block-end: 33px;
+    max-width: 334px;
 }
 
 img {
@@ -91,6 +91,8 @@ form {
     display: flex;
     flex-direction: column;
     gap: 16px;
+    max-width: 421px;
+    margin: 0 auto;
 }
 
 label {
@@ -117,15 +119,32 @@ input[type="email"], input[type="password"] {
     background-color: transparent;
     color: #D5CCBD;
     font-weight: 700;
+    transition: border-color 0.15s ease;
+}
+
+.borda-azul {
+    border: 1px solid #818181;
+    transition: border-color 0.15s ease;
+    background-color: transparent;
+    color: #D5CCBD;
+}
+
+.borda-azul:focus {
+    border-color: #2651A6;
+    outline: none;
 }
 
 input[type="submit"] {
     background-color: rgba(224, 19, 19, 0.502);
     color: #FFF;
     font-weight: 700;
-    font-size: 0.75rem;
+    font-size: var(--font-size-button);
     text-transform: uppercase;
     border: none;
     cursor: pointer;
     transition: background-color 0.15s ease;
+}
+
+input[type="submit"]:hover {
+    background-color: #E01313;
 }

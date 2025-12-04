@@ -19,6 +19,9 @@ body {
     font-style: normal;
     background-color: #000;
     color: #FFF;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
 body::before {
@@ -40,13 +43,13 @@ main {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    min-height: 100vh;
+    flex: 1;
 }
 
 .container {
     margin: 0 auto;
     max-width: 598px;
-    margin-block: 60px 139px;
+    margin-block: 60px 60px;
     margin-inline: 25px;
     padding-block: 36px;
     padding-inline: var(--container-padding-inline);
@@ -122,14 +125,7 @@ input[type="email"], input[type="password"] {
     transition: border-color 0.15s ease;
 }
 
-.borda-azul {
-    border: 1px solid #818181;
-    transition: border-color 0.15s ease;
-    background-color: transparent;
-    color: #D5CCBD;
-}
-
-.borda-azul:focus {
+input[type="email"]:focus, input[type="password"]:focus {
     border-color: #2651A6;
     outline: none;
 }

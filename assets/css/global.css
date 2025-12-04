@@ -9,6 +9,10 @@
     max-width: 100%;
 }
 
+.nav-toggle-btn {
+    display: none;
+}
+
 .lkju82567 {
     color: #FFF;
     background-color: #000000;
@@ -16,12 +20,6 @@
     font-optical-sizing: auto;
     font-style: normal;
     margin-inline: 60px;
-}
-
-@media screen and (max-width: 50rem) {
-    .lkju82567 {
-        margin-inline: 12px;
-    }
 }
 
 .con1238 {
@@ -61,4 +59,91 @@
 
 .icon-qyshansd {
     height: 1rem;
+}
+
+@media screen and (max-width: 50rem) {
+
+    .lkju82567 {
+        margin-inline: 12px;
+    }
+
+    .nav-a123asjqu {
+        gap: 8px;
+    }
+
+    .gtrewq {
+        justify-content: center;
+        flex-direction: column;
+        padding-block: 28px;
+    }
+
+    .oiwujmnh {
+        height: 58px;
+    }
+
+    .nav-a123asjqu {
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    .nav {
+        position: absolute;
+        visibility: hidden;
+        height: 0;
+    }
+
+    .nav--visible {
+        visibility: visible;
+        position: relative;
+        height: auto;
+    }
+
+    .nav-toggle-btn {
+        display: block;
+        cursor: pointer;
+        border: 0;
+        width: 3em;
+        height: 3em;
+        padding: 0;
+        border-radius: 50%;
+        background: rgba(224, 19, 19, 0.5);
+        color: #FFF;
+        transition: opacity 250ms ease;
+        position: absolute;
+        right: 33px;
+        top: 33px;
+    }
+
+    .nav-toggle-btn:focus,
+    .nav-toggle-btn:hover {
+        opacity: .75;
+    }
+
+    .hamburger {
+        width: 50%;
+        position: relative;
+    }
+
+    .hamburger,
+    .hamburger::before,
+    .hamburger::after {
+        display: block;
+        margin: 0 auto;
+        height: 3px;
+        background: #FFF;
+    }
+
+    .hamburger::before,
+    .hamburger::after {
+        content: '';
+        width: 100%;
+    }
+
+    .hamburger::before {
+        transform: translateY(-6px);
+    }
+
+    .hamburger::after {
+        transform: translateY(3px);
+    }
 }

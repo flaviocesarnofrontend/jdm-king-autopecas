@@ -1,3 +1,7 @@
+:root {
+    --texto-do-placeholder-da-pesquisa: clamp(0.5rem, -0.3889rem + 4.4444vw, 1rem);
+}
+
 .container-titulo-btn-novo-servico {
     display: flex;
     flex-direction: column;
@@ -65,7 +69,7 @@
 #busca::placeholder {
     color: #999;
     font-weight: 400;
-    font-size: 0.5rem;
+    font-size: var(--texto-do-placeholder-da-pesquisa);
 }
 
 #busca:focus {
@@ -78,4 +82,91 @@
 #busca::-webkit-search-results-decoration {
     -webkit-appearance: none;
     appearance: none;
+}
+
+.cartoes {
+    display: flex;
+    flex-direction: column;
+}
+
+.cartao {
+    margin-block: 32px;
+    border-radius: 10px;
+    padding: 12px;
+    background-color: #D9D9D9;
+}
+
+.cartao-componentes-preco {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+/* .cartao-componente-nome, .cartao-componente-preco, .cartao-ordem-servico {
+    font-size: 1rem;
+} */
+
+.cartao-componente-nome, .cartao-componente-preco {
+    font-weight: 900;
+    color: #000;
+}
+
+.cartao-status,
+.cartao-nome-cliente, 
+.cartao-nome-carro, 
+.cartao-data, 
+.cartao-pedido-label, 
+.cartao-execucao-label,
+.cartao-pecas-utilizadas-label,
+.cartao-pedido,
+.cartao-execucao {
+    font-weight: 700;
+}
+
+.cartao-status {
+    font-size: 0.7rem;
+    color: #337D1C;
+    background-color: rgba(51, 125, 28, 0.2);
+    padding: 7px 8px;
+    border-radius: 10px;
+}
+
+.cartao-ordem-servico {
+    font-weight: 900;
+}
+
+.cartao-ordem-servico,
+.cartao-pedido,
+.cartao-execucao {
+    color: #666;
+}
+
+.cartao-nome-cliente, 
+.cartao-nome-carro, 
+.cartao-data, 
+.cartao-pedido-label, 
+.cartao-execucao-label,
+.cartao-pecas-utilizadas-label {
+    font-weight: 700;
+    color: #000;
+}
+
+.cartao-nome-cliente, .cartao-nome-carro, .cartao-data  {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.cartao-container-peca {
+    display: flex;
+    gap: 16px;
+}
+
+.cartao-peca {
+    font-size: .75rem;
+    font-weight: 600;
+    padding: 6px 16px;
+    border-radius: 10px;
+    background-color: rgba(129, 129, 129, 0.5);
+    color: #000;
 }

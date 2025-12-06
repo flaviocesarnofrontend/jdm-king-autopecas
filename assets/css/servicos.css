@@ -92,8 +92,15 @@
 .cartao {
     margin-block: 32px;
     border-radius: 10px;
-    padding: 12px;
+    padding: 20px 12px;
     background-color: #D9D9D9;
+}
+
+.cartao-componente-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
 }
 
 .cartao-componentes-preco {
@@ -107,8 +114,29 @@
 } */
 
 .cartao-componente-nome, .cartao-componente-preco {
+    font-size: 1.2rem;
     font-weight: 900;
     color: #000;
+}
+
+.cartao-dados-cliente-container {
+    margin-block: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.cartao-pedido-container, .cartao-execucao-container {
+    margin-block-end: 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.cartao-pecas-utilizadas-container {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
 }
 
 .cartao-status,
@@ -169,4 +197,34 @@
     border-radius: 10px;
     background-color: rgba(129, 129, 129, 0.5);
     color: #000;
+}
+
+.linha-separadora {
+    height: 2px;
+    background-color:#666666;
+    margin-block: 20px;
+}
+
+.cartao-status-select {
+    width: 180px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 12px 12px;
+    border-radius: 10px;
+    border: 1px solid rgba(102, 102, 102, 0.5);
+    background-color: rgba(129, 129, 129, 0.2);
+    color: #000;
+    cursor: pointer;
+    padding-right: 62px; /* afastando o texto da seta */
+}
+
+/* Setinha do dropdown personalizada */
+.dropdown-select-arrow {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-image: url("../img/servicos/arrow-dropdown.svg");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    background-size: 12px 12px;
 }

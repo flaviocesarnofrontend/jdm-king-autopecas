@@ -166,3 +166,15 @@ input[type="submit"] {
 input[type="submit"]:hover {
     background-color: #E01313;
 }
+
+/* Prevenir re-renderização ao girar orientação no mobile */
+@media (orientation: landscape) {
+    html, body {
+        height: 100dvh;
+        max-height: 100dvh;
+    }
+    
+    main {
+        max-height: 100dvh;
+    }
+}

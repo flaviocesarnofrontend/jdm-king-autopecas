@@ -21,7 +21,7 @@ body {
     color: #FFF;
     display: flex;
     flex-direction: column;
-    min-height: 100dvh;
+    min-height: 100%;
 }
 
 body::before {
@@ -30,12 +30,12 @@ body::before {
     top: 0;
     left: 50%;
     width: 50%;
-    height: 100dvh;
+    height: 100%;
     background-image: url("./assets/img/index/bg-foto-motor.png");
     background-size: cover;
     background-position: 62% center;
     background-repeat: no-repeat;
-    z-index: -1;
+    z-index: -999;
 }
 
 /* .bg-fixed {
@@ -166,10 +166,10 @@ input[type="submit"]:hover {
 /* Prevenir re-renderização ao girar orientação no mobile */
 @media (orientation: landscape) {
     body {
-        min-height: 100dvh;
+        min-height: 100%;
     }
 
     body::before {
-        height: 100dvh;
+        height: 100%;
     }
 }

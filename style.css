@@ -13,6 +13,11 @@
     letter-spacing: .05rem;
 }
 
+html {
+    /* Suaviza transições de viewport ao girar celular */
+    transition: height 0.3s ease, max-height 0.3s ease;
+}
+
 body {
     font-family: "Inter", sans-serif;
     font-optical-sizing: auto;
@@ -21,7 +26,9 @@ body {
     color: #FFF;
     display: flex;
     flex-direction: column;
-    min-height: 100%;
+    min-height: 100dvh;
+    /* Suaviza transições ao esconder/mostrar barra de endereço */
+    transition: min-height 0.3s ease;
 }
 
 body::before {
@@ -37,19 +44,6 @@ body::before {
     background-repeat: no-repeat;
     z-index: -999;
 }
-
-/* .bg-fixed {
-    position: fixed;
-    top: 0;
-    left: 50%;
-    width: 50%;
-    height: 100%;
-    background-image: url("./assets/img/index/bg-foto-motor.png");
-    background-size: cover;
-    background-position: 62% center;
-    background-repeat: no-repeat;
-    z-index: -1;
-} */
 
 main {
     display: flex;
@@ -105,7 +99,7 @@ h2 {
 img {
     max-width: 100%;
     width: var(--img-size);
-    height: auto;
+    /* height: auto; */
 }
 
 form {
@@ -166,7 +160,7 @@ input[type="submit"]:hover {
 /* Prevenir re-renderização ao girar orientação no mobile */
 @media (orientation: landscape) {
     body {
-        min-height: 100%;
+        min-height: 100dvh;
     }
 
     body::before {

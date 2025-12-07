@@ -5,6 +5,16 @@
     letter-spacing: .05rem;
 }
 
+html {
+    /* Suaviza transições de viewport ao girar celular */
+    transition: height 0.3s ease, max-height 0.3s ease;
+}
+
+body {
+    /* Suaviza transições ao esconder/mostrar barra de endereço */
+    transition: min-height 0.3s ease;
+}
+
 .oiwujmnh {
     max-width: 100%;
 }

@@ -13,10 +13,6 @@
     letter-spacing: .05rem;
 }
 
-html {
-    height: 100dvh;
-}
-
 body {
     font-family: "Inter", sans-serif;
     font-optical-sizing: auto;
@@ -169,12 +165,7 @@ input[type="submit"]:hover {
 
 /* Prevenir re-renderização ao girar orientação no mobile */
 @media (orientation: landscape) {
-    html, body {
-        height: 100dvh;
-        max-height: 100dvh;
-    }
-    
-    main {
-        max-height: 100dvh;
+    body {
+        min-height: 100dvh;
     }
 }

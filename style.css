@@ -168,4 +168,8 @@ input[type="submit"]:hover {
     body {
         min-height: 100dvh;
     }
+
+    body::before {
+        height: 100dvh;
+    }
 }

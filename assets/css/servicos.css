@@ -1,5 +1,8 @@
 :root {
+    --border-radius: 10px;
     --texto-do-placeholder-da-pesquisa: clamp(0.5rem, -0.3889rem + 4.4444vw, 1rem);
+    --tamanho-da-fonte-do-toast: clamp(0.625rem, 0.375rem + 1.25vw, 1rem); /* 13.5px - 16px */
+    --pecas-utilizadas-small-label: clamp(0.625rem, 0.4917rem + 0.6667vw, 0.825rem); /* 10px - 13.2px */
 }
 
 .container-titulo-btn-novo-servico {
@@ -39,7 +42,7 @@
     background-color: #337D1C;
     color: #FFF;
     font-weight: 900;
-    border-radius: 10px;
+    border-radius: var(--border-radius);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -57,7 +60,7 @@
     width: 100%;
     color: #FFF;
     font-size: 0.75rem;
-    border-radius: 10px;
+    border-radius: var(--border-radius);
     outline: none;
     background-image: url("../img/servicos/pesquisar-icon.svg");
     background-repeat: no-repeat;
@@ -91,7 +94,7 @@
 
 .cartao {
     margin-block: 32px;
-    border-radius: 10px;
+    border-radius: var(--border-radius);
     padding: 20px 12px;
     background-color: #D9D9D9;
 }
@@ -108,10 +111,6 @@
     justify-content: space-between;
     align-items: flex-start;
 }
-
-/* .cartao-componente-nome, .cartao-componente-preco, .cartao-ordem-servico {
-    font-size: 1rem;
-} */
 
 .cartao-componente-nome, .cartao-componente-preco {
     font-size: 1.2rem;
@@ -151,12 +150,28 @@
     font-weight: 700;
 }
 
-.cartao-status {
+.cartao-status-andamento {
+    font-size: 0.7rem;
+    color: #2651A6;
+    background-color: rgba(38, 81, 166, 0.2);
+    padding: 7px 8px;
+    border-radius: var(--border-radius);
+}
+
+.cartao-status-concluido {
     font-size: 0.7rem;
     color: #337D1C;
     background-color: rgba(51, 125, 28, 0.2);
     padding: 7px 8px;
-    border-radius: 10px;
+    border-radius: var(--border-radius);
+}
+
+.cartao-status-entregue {
+    font-size: 0.7rem;
+    color: #DE5500;
+    background-color: rgba(222, 85, 0, 0.2);
+    padding: 7px 8px;
+    border-radius: var(--border-radius);
 }
 
 .cartao-ordem-servico {
@@ -194,7 +209,7 @@
     font-size: .75rem;
     font-weight: 600;
     padding: 6px 16px;
-    border-radius: 10px;
+    border-radius: var(--border-radius);
     background-color: rgba(129, 129, 129, 0.5);
     color: #000;
 }
@@ -207,15 +222,23 @@
 
 .cartao-status-select {
     width: 180px;
-    font-size: 0.75rem;
-    font-weight: 600;
-    padding: 12px 12px;
-    border-radius: 10px;
-    border: 1px solid rgba(102, 102, 102, 0.5);
-    background-color: rgba(129, 129, 129, 0.2);
-    color: #000;
+}
+
+.novo-servico-select {
+    width: 100%;
+}
+
+.cartao-status-select,
+.novo-servico-select {
+    font-size: 0.825rem;
+    font-weight: 900;
+    padding: 8px 6px;
+    border-radius: var(--border-radius);
+    border: 2px solid #666666;
+    background-color: transparent;   /* deixa fundo transparente */
+    color: #818181;
     cursor: pointer;
-    padding-right: 62px; /* afastando o texto da seta */
+    padding-right: 40px;
 }
 
 /* Setinha do dropdown personalizada */
@@ -229,6 +252,155 @@
     background-size: 12px 12px;
 }
 
+/* Mensagem de status */
+.toast-status {
+    position: fixed;
+    bottom: 20px;
+    right: 0px;
+    transform: translateX(350px) translateY(0px);
+    background-color: #BEBEBE;
+    color: #000;
+    padding: 14px 18px;
+    border-radius: var(--border-radius);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    font-size: var(--tamanho-da-fonte-do-toast);
+    font-weight: 400;
+    box-shadow: 0 4px 4px rgba(0,0,0,0.25);
+    opacity: 1;
+    transition: all 0.25s ease;
+    z-index: 9999;
+}
+
+.toast-icone {
+    width: 22px;
+    height: 22px;
+    display: flex;
+}
+
+/* Janela Modal */
+
+.modal-overlay {
+  display: flex;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  align-items: center;
+  justify-content: center;
+}
+
+.modal {
+    position: relative;
+    box-sizing: border-box;
+    background-color: #D9D9D9;
+    padding: 16px;
+    border-radius: var(--border-radius);
+    width: 100%;
+    max-width: 682px;
+    margin-inline: 12px;
+}
+
+.fecha-modal {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-titulo,
+.modal-sub-titulo {
+    font-weight: 900;
+}
+
+.modal-titulo {
+    font-size: 1.75rem;
+    color: #000;
+    margin-block-end: 10px;
+}
+
+.modal-sub-titulo {
+    color: #666666;
+}
+
+.modal-container-form {
+    display: flex;
+    flex-direction: column;
+    margin-block-start: 32px;
+    gap: 12px;
+}
+
+.modal-novo-servico-container {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.novo-servico-label {
+    font-weight: 700;
+    color: #000;
+}
+
+.novo-servico-descricao-pedido,
+.novo-servico-descricao-execucao {
+    font-family: "inter", sans-serif;
+    width: 100%;
+    padding: 12px;
+    border-radius: var(--border-radius);
+    border: 2px solid #666666;
+    background-color: transparent;   /* deixa fundo transparente */
+    color: #818181;
+    font-size: 0.825rem;
+    font-weight: 700;
+    resize: vertical;
+}
+
+.novo-servico-pecas-utilizadas-small-label {
+    font-size: var(--pecas-utilizadas-small-label);
+    color: #818181;
+}
+
+.valor-total-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-weight: 700;
+    font-size: 0.825rem;
+    color: #000;
+    background-color: rgba(129, 129, 129, 0.5);
+    padding: 8px 7px;
+    border-radius: var(--border-radius);
+}
+
+#valor-total {
+    font-size: 1rem;
+    font-weight: 900;
+}
+
+.close-btn-container {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.close-btn {
+    margin-top: 36px;
+    padding: 12px 16px;
+    border: none;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    background-color: #337D1C;
+    color: #FFF;
+    font-weight: 900;
+    font-size: 0.825rem;
+}
+
 @media screen and (min-width: 50rem) /* 800px */ {
     .container-btn {
         margin: 0;
@@ -236,6 +408,10 @@
     .container-titulo-btn-novo-servico {
         flex-direction: row;
         justify-content: space-between;
-        align-items: flex-start
+        align-items: flex-start;
+    }
+
+    .modal {
+        margin-inline: 60px;
     }
 }

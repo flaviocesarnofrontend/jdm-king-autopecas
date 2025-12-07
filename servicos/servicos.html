@@ -43,7 +43,7 @@
                 <p class="sub-titulo">Gerencie ordens de serviço e acompanhe o status</p>
             </div>
             <div class="container-btn">
-                <button class="btn-novo-servico">
+                <button class="btn-novo-servico" onclick="openModal()">
                     <img src="../assets/img/clientes/adicionar-icon.svg" alt="">
                     Nova ordem de serviço
                 </button>
@@ -55,7 +55,7 @@
                 <div class="cartao-componentes-preco">
                     <div class="cartao-componente-container">
                         <p class="cartao-componente-nome">Troca de Óleo</p>
-                        <span class="cartao-status">Concluído</span>
+                        <span class="cartao-status-andamento">Em andamento</span>
                         <p class="cartao-ordem-servico">OS <span class="cartao-ordem-servico-numero">#1</span></p>
                     </div>
                     <p class="cartao-componente-preco">R$ 250,00</p>
@@ -95,6 +95,69 @@
                     <option value="concluido">Concluído</option>
                     <option value="entregue">Entregue</option>
                 </select>
+            </div>
+        </div>
+        <!-- toast -->
+        <div id="toast-status" class="toast-status">
+            <span class="toast-icone">
+                <img src="../assets/img/servicos/check-icon.svg" alt="">
+            </span>
+            <span id="toast-texto">Status atualizado</span>
+        </div>
+        <!-- modal -->
+         <div class="modal-overlay" id="modalOverlay" onclick="closeModal()">
+            <div class="modal" onclick="event.stopPropagation()">
+                <div class="fecha-modal" onclick="closeModal()">
+                    <img src="../assets/img/servicos/cancel-icon.svg" alt="">
+                </div>
+                <h2 class="modal-titulo">Nova Ordem de Serviço</h2>
+                <p class="modal-sub-titulo">Registre um novo serviço no sistema</p>
+                <div class="modal-container-form">
+                    <div class="modal-novo-servico-container">
+                        <label class="novo-servico-label" for="novo-servico-label">Tipo de Serviço</label>
+                        <select class="novo-servico-select dropdown-select-arrow" name="novo-servico-select" id="novo-servico-select" class="">
+                            <option selected>Selecione o tipo</option>
+                            <option value="servico1">Troca de óleo</option>
+                            <option value="servico2">Revisão completa</option>
+                        </select>
+                    </div>
+                    <div class="modal-novo-servico-container">
+                        <label class="novo-servico-label" for="novo-servico-cliente">Cliente</label>
+                        <select class="novo-servico-select dropdown-select-arrow" name="novo-servico-cliente-select" id="novo-servico-cliente-select" class="">
+                            <option selected>Nome do cliente</option>
+                            <option value="servico1">João Silva</option>
+                            <option value="servico2">Maria Santos</option>
+                        </select>
+                    </div>
+                    <div class="modal-novo-servico-container">
+                        <label class="novo-servico-label" for="novo-servico-descricao-pedido">Descrição do Pedido</label>
+                        <textarea class="novo-servico-descricao-pedido" name="novo-servico-descricao-pedido" id="novo-servico-descricao-pedido" rows="5" placeholder="O que o cliente relatou..."></textarea>
+                    </div>
+                    <div class="modal-novo-servico-container">
+                        <label class="novo-servico-label" for="novo-servico-descricao-execucao">Descrição da Execução</label>
+                        <textarea class="novo-servico-descricao-execucao" name="novo-servico-descricao-execucao" id="novo-servico-descricao-execucao" rows="5" placeholder="O que o mecânico relatou..."></textarea>
+                    </div>
+                    <div class="modal-novo-servico-container">
+                        <label class="novo-servico-label" for="novo-servico-pecas-utilizadas-select">Peças Utilizadas</label>
+                        <select class="novo-servico-select dropdown-select-arrow" name="novo-servico-pecas-utilizadas-select" id="novo-servico-pecas-utilizadas-select" class="">
+                            <option selected>Selecione a peça do estoque</option>
+                            <option value="peca1">Óleo 5W30 (Disponível: 37)</option>
+                            <option value="peca2">Filtro de óleo (Disponível: 20)</option>
+                        </select>
+                        <small class="novo-servico-pecas-utilizadas-small-label">Clique na peça para remover. Selecione a mesma peça novamente para aumentar a quantidade.</small>
+                    </div>
+                    <div class="modal-novo-servico-container">
+                        <label class="novo-servico-label" for="">Valor total</label>
+                        <div class="valor-total-container">
+                            <span>Total:</span>
+                            <span id="valor-total">R$ 0,00</span>
+                        </div>
+                    </div>
+                    <!-- <button onclick="salvarCliente()">Salvar</button> -->
+                    <div class="close-btn-container">
+                        <button class="close-btn" onclick="closeModal()">Criar ordem de serviço</button>
+                    </div>
+                </div>
             </div>
         </div>
     </main>

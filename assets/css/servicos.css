@@ -228,3 +228,14 @@
     background-position: right 12px center;
     background-size: 12px 12px;
 }
+
+@media screen and (min-width: 50rem) /* 800px */ {
+    .container-btn {
+        margin: 0;
+    }
+    .container-titulo-btn-novo-servico {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: flex-start
+    }
+}

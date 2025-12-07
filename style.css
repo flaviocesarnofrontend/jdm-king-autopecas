@@ -48,7 +48,6 @@ body {
     background-size: cover;
     background-position: 62% center;
     background-repeat: no-repeat;
-    background-attachment: fixed;
     z-index: -1;
 }
 

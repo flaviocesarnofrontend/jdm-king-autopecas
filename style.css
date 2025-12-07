@@ -13,6 +13,10 @@
     letter-spacing: .05rem;
 }
 
+html {
+    height: 100dvh;
+}
+
 body {
     font-family: "Inter", sans-serif;
     font-optical-sizing: auto;
@@ -21,11 +25,24 @@ body {
     color: #FFF;
     display: flex;
     flex-direction: column;
-    min-height: 100vh;
+    min-height: 100dvh;
 }
 
-/* body::before {
+body::before {
     content: "";
+    position: fixed;
+    top: 0;
+    left: 50%;
+    width: 50%;
+    height: 100dvh;
+    background-image: url("./assets/img/index/bg-foto-motor.png");
+    background-size: cover;
+    background-position: 62% center;
+    background-repeat: no-repeat;
+    z-index: -1;
+}
+
+/* .bg-fixed {
     position: fixed;
     top: 0;
     left: 50%;
@@ -37,19 +54,6 @@ body {
     background-repeat: no-repeat;
     z-index: -1;
 } */
-
-.bg-fixed {
-    position: fixed;
-    top: 0;
-    left: 50%;
-    width: 50%;
-    height: 100%;
-    background-image: url("./assets/img/index/bg-foto-motor.png");
-    background-size: cover;
-    background-position: 62% center;
-    background-repeat: no-repeat;
-    z-index: -1;
-}
 
 main {
     display: flex;

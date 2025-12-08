@@ -36,7 +36,5 @@ function initLocalStorage() {
   if (!localStorage.getItem("servicos")) {
     localStorage.setItem("servicos", JSON.stringify([]));
   }
-
 }
-
 initLocalStorage();

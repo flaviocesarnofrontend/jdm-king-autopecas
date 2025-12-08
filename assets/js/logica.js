@@ -45,12 +45,15 @@ function salvarServico() {
   const veiculoId = document.getElementById("novo-servico-cliente-carro-select").value;
   const descricaoPedido = document.getElementById("novo-servico-descricao-pedido").value;
   const descricaoExecucao = document.getElementById("novo-servico-descricao-execucao").value;
+  const tipoServicoTexto = document.getElementById("novo-servico-select").selectedOptions[0].textContent;
+
 
   // montar objeto (inicialmente setamos pecas/total antes de salvar)
   const servico = {
     id: Date.now(),
     clienteId,
     veiculoId,
+    tipoServico: tipoServicoTexto, 
     pedido: descricaoPedido,
     execucao: descricaoExecucao,
     status: "andamento",
@@ -107,7 +110,7 @@ function renderizarServicos(lista) {
         <div class="cartao">
             <div class="cartao-componentes-preco">
                 <div class="cartao-componente-container">
-                    <p class="cartao-componente-nome">Troca de Óleo</p>
+                    <p class="cartao-componente-nome">${servico.tipoServico}</p>
                     <span class="${getClasseStatus(servico.status)}">${formatStatus(servico.status)}</span>
                     <p class="cartao-ordem-servico">OS <span class="cartao-ordem-servico-numero">#${servico.id}</span></p>
                 </div>

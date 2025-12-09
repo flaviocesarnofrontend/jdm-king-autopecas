@@ -159,15 +159,23 @@ function renderizarServicos(lista) {
   });
 }
 
-function mostrarToast() {
+function mostrarToast(mensagem) {
     const toast = document.getElementById("toast-status");
 
     /**
      * 
-     * adicionar os textos corretos aqui depois
+     * adicionar os textos corretos aqui depois (resolvido)
      * adicionar o posicionamento correto do toast em telas >800px
      * 
      */
+
+    toast.innerHTML = 
+      `
+        <span class="toast-icone">
+          <img src="../assets/img/servicos/check-icon.svg" alt="">
+        </span>
+        <span id="toast-texto">Status atualizado para ${mensagem}</span>
+      `;
 
     toast.style.transform = "translateX(-12px)";
     toast.style.opacity = "1";
@@ -186,7 +194,7 @@ function alterarStatus(id, novoStatus) {
   localStorage.setItem("servicos", JSON.stringify(servicos));
 
   carregarServicos();
-  mostrarToast();
+  mostrarToast(servico.status);
 }
 
 carregarServicos();

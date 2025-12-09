@@ -33,22 +33,21 @@
         </nav>
     </header>
     <main class="con1238">
-        <!-- o seu conteúdo vai aqui -->
         <div class="container-titulo-btn-novo-cliente">
             <div class="container-titulo">
                 <h1 class="titulo">Clientes</h1>
                 <p class="sub-titulo">Gerencie seus clientes e veículos cadastrados</p>
             </div>
-            <div>
+            <div id="novoCliente">
                 <button class="btn-novo-cliente">
                     <img src="../assets/img/clientes/adicionar-icon.svg" alt="">
                     Novo cliente
                 </button>
             </div>
         </div>
-        <input type="search" name="busca" id="busca" placeholder="Busque por nome, CPF ou telefone">
+        <input type="search" name="busca" id="busca" placeholder="Busque por nome, CPF ou telefone"></input>
         <div class="cartoes">
-            <div class="cartao">
+            <!-- <div class="cartao">
                 <div class="cartao-container-cliente">
                     <div>
                         <p class="cartao-nome">João Silva</p>
@@ -115,10 +114,50 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
         </div>
+
+        <dialog id="myModal">
+            <div class="modal">
+                <div class="modal-header">
+                    <h2 id="novoCliente">Novo cliente</h2>
+                </div>
+        
+                <p class="modal-subtitulo">Preencha os dados do cliente para cadastro no sistema</p>
+        
+                <form id="formNovoCliente">
+        
+                    <label>Nome completo</label>
+                    <input type="text" name="nome" required>
+        
+                    <label>CPF</label>
+                    <input type="text" name="cpf" required maxlength="14">
+        
+                    <label>Telefone</label>
+                    <input type="text" name="telefone" required maxlength="15">
+        
+                    <label>E-mail</label>
+                    <input type="email" name="email" required>
+        
+                    <label>Veículo(s)</label>
+        
+                    <div class="linha-veiculos">
+                        <input type="text" id="campoModelo" placeholder="Modelo">
+                        <input type="text" id="campoPlaca" placeholder="Placa" maxlength="7">
+                        <button id="btnAddVeiculo" type="button" class="btn-add">+</button>
+                    </div>
+        
+                    <div id="listaVeiculos" class="lista-veiculos"></div>
+        
+                    <button type="submit" class="btn-salvar" id="cadastrar">Cadastrar</button>
+        
+                </form>
+            </div>
+            <button id="closeButton">Fechar</button>
+          </dialog>
+
     </main>
-    <script src="../assets/js/global.js"></script>
-    <script src="../assets/js/clientes.js"></script>
+    <script src="/assets/js/mock.js"></script>
+    <script src="/assets/js/clientes.js"></script>
 </body>
 </html>

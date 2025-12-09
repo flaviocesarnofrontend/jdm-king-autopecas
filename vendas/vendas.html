@@ -1,42 +1,118 @@
-<!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&amp;display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="../assets/css/global.css">
     <link rel="stylesheet" href="../assets/css/vendas.css">
     <title>Vendas</title>
 </head>
+
 <body class="lkju82567">
     <header class="gtrewq con1238">
         <img class="oiwujmnh" src="../assets/img/global/logo-banner.svg" alt="">
         <nav class="nav-a123asjqu">
-            <a href="../clientes/clientes.html" class="nav-link-aqweasdjh">
-                <img class="oiwujmnh icon-qyshansd" src="../assets/img/global/icons/clientes-icon.svg" alt="Clientes" class="nav-icon">
+            <a href="#" class="nav-link-aqweasdjh">
+                <img class="oiwujmnh icon-qyshansd" src="../assets/img/global/icons/clientes-icon.svg" alt="Clientes">
                 <span>Clientes</span>
             </a>
             <a href="../servicos/servicos.html" class="nav-link-aqweasdjh">
-                <img class="oiwujmnh icon-qyshansd" src="../assets/img/global/icons/servicos-icon.svg" alt="Serviços" class="nav-icon">
+                <img class="oiwujmnh icon-qyshansd" src="../assets/img/global/icons/servicos-icon.svg" alt="Serviços">
                 <span>Serviços</span>
             </a>
-            <a href="#" class="nav-link-aqweasdjh">
-                <img class="oiwujmnh icon-qyshansd" src="../assets/img/global/icons/vendas-icon.svg" alt="Vendas" class="nav-icon">
+            <a href="../vendas/vendas.html" class="nav-link-aqweasdjh">
+                <img class="oiwujmnh icon-qyshansd" src="../assets/img/global/icons/vendas-icon.svg" alt="Vendas">
                 <span>Vendas</span>
             </a>
             <a href="../estoque/estoque.html" class="nav-link-aqweasdjh">
-                <img class="oiwujmnh icon-qyshansd" src="../assets/img/global/icons/estoque-icon.svg" alt="Estoque" class="nav-icon">
+                <img class="oiwujmnh icon-qyshansd" src="../assets/img/global/icons/estoque-icon.svg" alt="Estoque">
                 <span>Estoque</span>
             </a>
         </nav>
     </header>
     <main class="con1238">
         <!-- o seu conteúdo vai aqui -->
-         <h1>Vendas</h1>
+        <div class="container-titulo-btn-novo-cliente">
+            <div class="container-titulo">
+                <h1 class="titulo">Vendas</h1>
+                <p class="sub-titulo">Gerencie vendas avulsas de peças</p>
+            </div>
+            <div>
+                <button class="btn-novo-vendas">
+                    <img src="../assets/img/clientes/adicionar-icon.svg" alt="">
+                    Nova Venda
+                </button>
+            </div>
+        </div>
+        <input type="search" name="busca" id="busca" placeholder="Busque por peças ou clientes...">
+        <div class="cartoes">
+
+            <div class="cartao">
+                <h2 class="cartao-titulo">Histórico de Vendas</h2>
+                <!-- primeiro produto -->
+                <div class="cartao-item-lista">
+                    <div class="container-agrupar">
+                        <p class="cartao-produtos">Óleo 5W30</p>
+                        <div class="">
+                            <span>Qtd: 4</span>
+                            <span class="detalhe-historico">Unit: R$45,00</span>
+                            <span class="detalhe-historico">Cliente: João Silva-123.456.789.00</span>
+                        </div>
+                    </div>
+                    <div class="valor">
+                        <p class="cp">R$180,00</p>
+                        <p class="data">27/11/2025</p>
+                    </div>
+                </div>
+                <!-- segundo produto -->
+
+                <div class="cartao-item-lista">
+                    <div class="container-agrupar">
+                        <p class="cartao-produtos">Filtro de Ar</p>
+                        <p class="cartao-dados">
+                        <div class="">
+                            <span>Qtd: 2</span>
+                            <span class="detalhe-historico">Unit: R$35,00</span>
+                            <span class="detalhe-historico">Cliente: Maria Santos-987.654.321.00</span>
+                            <div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="valor">
+                        <p class="cp">R$70,00</p>
+                        <p class="data">25/11/2025</p>
+                    </div>
+                </div>
+                <!-- terceiro produto -->
+                <div class="cartao-item-lista">
+                    <div class="container-agrupar">
+                        <p class="cartao-produtos">Pastilha de Freio</p>
+                        <p class="cartao-dados">
+                        <div class="">
+                            <span>Qtd: 1</span>
+                            <span class="detalhe-historico">Unit: R$120,00</span>
+                            <span class="detalhe-historico">Cliente: Flavio Cesar-872.772.098.00</span>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="valor">
+                            <p class="cp">R$120,00</p>
+                            <p class="data">25/11/2025</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
     </main>
-    <script src="../assets/js/global.js"></script>
     <script src="../assets/js/vendas.js"></script>
+
+
 </body>
+
 </html>

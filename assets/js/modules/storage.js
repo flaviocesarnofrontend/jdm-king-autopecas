@@ -1,12 +1,8 @@
-let clientes = JSON.parse(localStorage.getItem("clientes")) ?? [];
-let servicos = JSON.parse(localStorage.getItem("servicos")) ?? [];
+export let clientes = JSON.parse(localStorage.getItem("clientes")) ?? [];
+export let servicos = JSON.parse(localStorage.getItem("servicos")) ?? [];
 
-// =======================================
-// LocalStorage inicial
-// =======================================
-function initLocalStorage() {
+export function initLocalStorage() {
 
-  // CLIENTES
   if (!localStorage.getItem("clientes")) {
 
     const clientesIniciais = [
@@ -30,11 +26,11 @@ function initLocalStorage() {
     ];
 
     localStorage.setItem("clientes", JSON.stringify(clientesIniciais));
+    clientes = clientesIniciais;
   }
 
-  // SERVIÇOS
   if (!localStorage.getItem("servicos")) {
     localStorage.setItem("servicos", JSON.stringify([]));
+    servicos = [];
   }
 }
-initLocalStorage();

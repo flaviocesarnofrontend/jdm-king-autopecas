@@ -367,6 +367,25 @@
     color: #818181;
 }
 
+.peca-selecionadas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.peca-selecionada {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background-color: rgba(107, 107, 107, 0.5);
+    color: #000;
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 11px 15px;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+}
+
 .valor-total-container {
     display: flex;
     align-items: center;
@@ -413,5 +432,10 @@
 
     .modal {
         margin-inline: 60px;
+    }
+
+    .cartao-dados-cliente-container {
+        flex-direction: row;
+        gap: 60px;
     }
 }

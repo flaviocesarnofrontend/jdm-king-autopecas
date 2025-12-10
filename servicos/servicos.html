@@ -51,51 +51,7 @@
         </div>
         <input type="search" name="busca" id="busca" placeholder="Busque por n° da ordem, cliente, veículo ou serviço">
         <div class="cartoes" id="cartoesContainer">
-            <!-- <div class="cartao">
-                <div class="cartao-componentes-preco">
-                    <div class="cartao-componente-container">
-                        <p class="cartao-componente-nome">Troca de Óleo</p>
-                        <span class="cartao-status-andamento">Em andamento</span>
-                        <p class="cartao-ordem-servico">OS <span class="cartao-ordem-servico-numero">#1</span></p>
-                    </div>
-                    <p class="cartao-componente-preco">R$ 250,00</p>
-                </div>
-                <div class="cartao-dados-cliente-container">
-                    <p class="cartao-nome-cliente">
-                        <img src="../assets/img/servicos/user-icon.svg" alt="">
-                        João Silva
-                    </p>
-                    <p class="cartao-nome-carro">
-                        <img src="../assets/img/servicos/car-icon.svg" alt="">
-                        Honda Civic - ABC-1234
-                    </p>
-                    <p class="cartao-data">
-                        <img src="../assets/img/servicos/calendario.svg" alt="">
-                        26/11/2025
-                    </p>
-                </div>
-                <div class="cartao-pedido-container">
-                    <p class="cartao-pedido-label">Pedido:</p>
-                    <p class="cartao-pedido">Cliente relatou necessidade de troca de óleo</p>
-                </div>
-                <div class="cartao-execucao-container">
-                    <p class="cartao-execucao-label">Execução:</p>
-                    <p class="cartao-execucao">Realizada troca de óleo e filtro</p>
-                </div>
-                <div class="cartao-pecas-utilizadas-container">
-                    <p class="cartao-pecas-utilizadas-label">Peças Utilizadas:</p>
-                    <div class="cartao-container-peca">
-                        <p class="cartao-peca">Óleo 5W30</p>
-                        <p class="cartao-peca">Filtro de óleo</p>
-                    </div>
-                </div>
-                 <div class="linha-separadora"></div>
-                <select name="status-servico" id="status-servico" class="cartao-status-select dropdown-select-arrow">
-                    <option value="andamento" selected>Em andamento</option>
-                    <option value="concluido">Concluído</option>
-                    <option value="entregue">Entregue</option>
-                </select>
-            </div> -->
+            <!-- os cartões de serviço serão inseridos aqui dinamicamente -->
         </div>
         <!-- toast -->
         <div id="toast-status" class="toast-status">
@@ -134,9 +90,9 @@
                         </select>
                     </div>
                     <!-- os veículos do cliente serão carregados dinamicamente conforme o cliente selecionado -->
-                    <div class="modal-novo-servico-container">
+                    <div id="container-veiculo" class="modal-novo-servico-container" style="display:none;">
                         <label class="novo-servico-label" for="novo-servico-cliente-carro-select">Veículo do cliente</label>
-                        <select class="novo-servico-select dropdown-select-arrow" name="novo-servico-cliente-carro-select" id="novo-servico-cliente-carro-select" class="">
+                        <select class="novo-servico-select dropdown-select-arrow" name="novo-servico-cliente-carro-select" id="novo-servico-cliente-carro-select" disabled>
                             <option selected>Selecione o veículo</option>
                             <!-- <option value="cliente-carro1">Honda Civic - ABC-12345</option> -->
                             <!-- <option value="cliente-carro2">Fusca 78 - ABC-12345</option> -->

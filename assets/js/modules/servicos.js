@@ -2,6 +2,7 @@ import { clientes, servicos } from "./storage.js";
 import { getPecas, getTotal, resetPecas } from "./pecas.js";
 import { getClasseStatus, formatStatus, mostrarToast } from "./status.js";
 import { closeModal } from "./modal.js"; // modal.js will export closeModal
+import { carregarVeiculos } from "./veiculos.js";
 
 // salva nova OS
 export function salvarServico() {
@@ -32,6 +33,7 @@ export function salvarServico() {
 
   // salva no array e localStorage
   servicos.push(servico);
+  servicos.sort((a, b) => b.id - a.id);
   localStorage.setItem("servicos", JSON.stringify(servicos));
 
   // reset das peças e modal
@@ -40,6 +42,76 @@ export function salvarServico() {
   closeModal();
   carregarServicos();
 }
+
+export function editarServico(id) {
+  const servico = servicos.find(s => s.id == id);
+  if (!servico) return;
+
+  // abre modal
+  openModal();
+
+  // seleciona tipo
+  document.getElementById("novo-servico-select").value = servico.tipoServico;
+
+  // cliente
+  document.getElementById("novo-servico-cliente-select").value = servico.clienteId;
+
+  // carrega veículos depois de selecionar cliente
+  carregarVeiculos(servico.clienteId);
+
+  // seta veículo selecionado
+  document.getElementById("novo-servico-cliente-carro-select").value = servico.veiculoId;
+
+  // descrições
+  document.getElementById("novo-servico-descricao-pedido").value = servico.pedido;
+  document.getElementById("novo-servico-descricao-execucao").value = servico.execucao;
+
+  // peças
+  pecasSelecionadas = servico.pecas.map(p => ({
+    id: p.nome,
+    nome: p.nome,
+    preco: p.preco,
+    qtd: p.quantidade
+  }));
+
+  atualizarTotal();
+  atualizarListaPecasDOM();
+
+  // trocar ação do botão
+  document.querySelector(".close-btn").onclick = () => salvarEdicaoServico(id);
+}
+
+export function salvarEdicaoServico(id) {
+  const s = servicos.find(s => s.id == id);
+
+  s.tipoServico = document.getElementById("novo-servico-select").selectedOptions[0].textContent;
+  s.clienteId = document.getElementById("novo-servico-cliente-select").value;
+  s.veiculoId = document.getElementById("novo-servico-cliente-carro-select").value;
+  s.pedido = document.getElementById("novo-servico-descricao-pedido").value;
+  s.execucao = document.getElementById("novo-servico-descricao-execucao").value;
+
+  s.pecas = pecasSelecionadas.map(p => ({
+    nome: p.nome,
+    preco: p.preco,
+    quantidade: p.qtd
+  }));
+
+  s.total = totalAtual;
+
+  localStorage.setItem("servicos", JSON.stringify(servicos));
+
+  closeModal();
+  carregarServicos();
+}
+
+export function excluirServico(id) {
+  if (!confirm("Tem certeza que deseja excluir esta OS?")) return;
+
+  servicos = servicos.filter(s => s.id != id);
+  localStorage.setItem("servicos", JSON.stringify(servicos));
+  carregarServicos();
+}
+
 
 // render / listar
 export function carregarServicos() {
@@ -100,11 +172,17 @@ export function renderizarServicos(lista) {
                 </div>
             </div>
                 <div class="linha-separadora"></div>
-            <select onchange="window.__alterarStatus && window.__alterarStatus(${servico.id}, this.value)" class="cartao-status-select dropdown-select-arrow">
-                <option value="andamento" ${servico.status==="andamento"?"selected":""}>Em andamento</option>
-                <option value="concluido" ${servico.status==="concluido"?"selected":""}>Concluído</option>
-                <option value="entregue" ${servico.status==="entregue"?"selected":""}>Entregue</option>
-            </select>
+            <div class="cartao-status-editar-excluir-container">
+              <select onchange="window.__alterarStatus && window.__alterarStatus(${servico.id}, this.value)" class="cartao-status-select dropdown-select-arrow">
+                  <option value="andamento" ${servico.status==="andamento"?"selected":""}>Em andamento</option>
+                  <option value="concluido" ${servico.status==="concluido"?"selected":""}>Concluído</option>
+                  <option value="entregue" ${servico.status==="entregue"?"selected":""}>Entregue</option>
+              </select>
+              <div class="cartao-editar-excluir-buttons">
+                  <a href="#" class="cartao-editar-button" onclick="editarServico(${servico.id})"><img src="../assets/img/servicos/edit-icon.svg" alt=""></a>
+                  <a href="#" class="cartao-excluir-button" onclick="excluirServico(${servico.id})"><img src="../assets/img/servicos/delete-icon.svg" alt=""></a>
+              </div>
+            </div>
         </div>
     `;
   });
@@ -153,3 +231,4 @@ window.__alterarStatus = alterarStatus;
 
 // quando o módulo é importado, carrega serviços imediatamente
 carregarServicos();
+

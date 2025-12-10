@@ -18,5 +18,10 @@ window.__alterarStatus = ServicosModule.alterarStatus; // usado pelo onchange do
 window.carregarServicos = ServicosModule.carregarServicos;
 window.filtrarServicos = ServicosModule.filtrarServicos;
 
-// refresh inicial (servicos.js já faz um carregar no import, mas garantimos)
+// window.editarServico = ServicosModule.editarServico;
+// window.excluirServico = ServicosModule.excluirServico;
+// window.salvarEdicaoServico = ServicosModule.salvarEdicaoServico;
+
+
+// refresh inicial (garantia)
 ServicosModule.carregarServicos();

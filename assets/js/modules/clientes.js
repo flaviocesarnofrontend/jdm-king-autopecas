@@ -1,16 +1,21 @@
+// modules/clientes.js
 import { clientes } from "./storage.js";
 import { carregarVeiculos } from "./veiculos.js";
 
-// exporta função para o modal usar
 export function carregarClientes() {
   const selectCliente = document.getElementById("novo-servico-cliente-select");
+  const selectVeiculo = document.getElementById("novo-servico-cliente-carro-select");
+  const containerVeiculo = document.getElementById("container-veiculo");
 
-  // limpa opções
-  selectCliente.innerHTML = `
-    <option selected>Nome do cliente</option>
-  `;
+  if (!selectCliente || !selectVeiculo) return;
 
-  // joga cada cliente como uma opção
+  selectCliente.innerHTML = `<option selected value="">Nome do cliente</option>`;
+
+  selectVeiculo.innerHTML = `<option selected>Selecione o veículo</option>`;
+  selectVeiculo.disabled = true;
+
+  containerVeiculo.style.display = "none";
+
   clientes.forEach(cliente => {
     selectCliente.innerHTML += `
       <option value="${cliente.id}">${cliente.nome}</option>
@@ -18,10 +23,38 @@ export function carregarClientes() {
   });
 }
 
-// adiciona listener (executado ao importar o módulo)
+// Setar cliente programaticamente e disparar change
+export function selecionarClienteParaEdicao(clienteId) {
+  const selectCliente = document.getElementById("novo-servico-cliente-select");
+  if (!selectCliente) return;
+
+  selectCliente.value = clienteId;
+
+  // força executar tudo como se tivesse mudado
+  const evento = new Event("change");
+  selectCliente.dispatchEvent(evento);
+
+  // bloqueia edição
+  selectCliente.disabled = true;
+}
+
+// listener
 const selectClienteEl = document.getElementById("novo-servico-cliente-select");
 if (selectClienteEl) {
-  selectClienteEl.addEventListener("change", function() {
-    carregarVeiculos(clientes, this.value);
+  selectClienteEl.addEventListener("change", function () {
+    const clienteId = this.value;
+    const containerVeiculo = document.getElementById("container-veiculo");
+    const selectVeiculo = document.getElementById("novo-servico-cliente-carro-select");
+
+    if (!clienteId) {
+      containerVeiculo.style.display = "none";
+      selectVeiculo.innerHTML = `<option selected>Selecione o veículo</option>`;
+      selectVeiculo.disabled = true;
+      return;
+    }
+
+    containerVeiculo.style.display = "block";
+    selectVeiculo.disabled = false;
+    carregarVeiculos(clienteId);
   });
 }

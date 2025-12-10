@@ -1,15 +1,16 @@
+// modules/modal.js
 import { carregarClientes } from "./clientes.js";
 import { resetPecas } from "./pecas.js";
 
 export function openModal() {
   const overlay = document.getElementById("modalOverlay");
-  if (!overlay) return;
   overlay.style.display = "flex";
 
-  // carrega clientes no select
   carregarClientes();
 
-  // reseta peças e total
+  // ocultar veículo
+  document.getElementById("container-veiculo").style.display = "none";
+
   resetPecas();
 }
 

@@ -1,3 +1,4 @@
+// modules/storage.js
 export let clientes = JSON.parse(localStorage.getItem("clientes")) ?? [];
 export let servicos = JSON.parse(localStorage.getItem("servicos")) ?? [];
 

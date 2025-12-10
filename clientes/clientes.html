@@ -39,7 +39,7 @@
                 <p class="sub-titulo">Gerencie seus clientes e veículos cadastrados</p>
             </div>
             <div id="novoCliente">
-                <button class="btn-novo-cliente">
+                <button id="btn-cadastro-novo-cliente" class="btn-novo-cliente">
                     <img src="../assets/img/clientes/adicionar-icon.svg" alt="">
                     Novo cliente
                 </button>
@@ -119,6 +119,9 @@
 
         <dialog id="myModal">
             <div class="modal">
+                <div id="closeButton">
+                    <img src="../assets/img/clientes/cancel-icon.svg" alt="">
+                </div>
                 <div class="modal-header">
                     <h2 id="novoCliente">Novo cliente</h2>
                 </div>
@@ -127,33 +130,44 @@
         
                 <form id="formNovoCliente">
         
-                    <label>Nome completo</label>
-                    <input type="text" name="nome" required>
-        
-                    <label>CPF</label>
-                    <input type="text" name="cpf" required maxlength="14">
-        
-                    <label>Telefone</label>
-                    <input type="text" name="telefone" required maxlength="15">
-        
-                    <label>E-mail</label>
-                    <input type="email" name="email" required>
-        
-                    <label>Veículo(s)</label>
-        
-                    <div class="linha-veiculos">
-                        <input type="text" id="campoModelo" placeholder="Modelo">
-                        <input type="text" id="campoPlaca" placeholder="Placa" maxlength="7">
-                        <button id="btnAddVeiculo" type="button" class="btn-add">+</button>
+                    <div class="modal-container-form-componente">
+                        <label class="modal-label">Nome completo</label>
+                        <input class="modal-input" type="text" name="nome" placeholder="Digite o nome completo" required>
                     </div>
         
-                    <div id="listaVeiculos" class="lista-veiculos"></div>
+                    <div class="modal-container-form-componente">
+                        <label class="modal-label">CPF</label>
+                        <input class="modal-input" type="text" name="cpf" placeholder="Apenas números" required maxlength="14">
+                    </div>
         
-                    <button type="submit" class="btn-salvar" id="cadastrar">Cadastrar</button>
+                    <div class="modal-container-form-componente">
+                        <label class="modal-label">Telefone</label>
+                        <input class="modal-input" type="text" name="telefone" placeholder="Apenas números" required maxlength="15">
+                    </div>
+        
+                    <div class="modal-container-form-componente">
+                        <label class="modal-label">E-mail</label>
+                        <input class="modal-input" type="email" name="email" placeholder="email@exemplo.com" required>
+                    </div>
+        
+                    <div class="modal-container-form-componente">
+                        <label class="modal-label">Veículo(s)</label>
+                        <div class="linha-veiculos">
+                            <input class="modal-input" type="text" id="campoModelo" placeholder="Modelo">
+                            <input class="modal-input" type="text" id="campoPlaca" placeholder="Placa" maxlength="7">
+                            <button id="btnAddVeiculo" type="button" class="btn-add">
+                                <img src="../assets/img/clientes/adicionar-icon.svg" alt="Adicionar veículo">
+                            </button>
+                        </div>
+                        <div id="listaVeiculos" class="lista-veiculos"></div>
+                    </div>
+        
+                    <div class="btn-salvar-container">
+                        <button type="submit" class="btn-salvar" id="cadastrar">Cadastrar</button>
+                    </div>
         
                 </form>
             </div>
-            <button id="closeButton">Fechar</button>
           </dialog>
 
     </main>

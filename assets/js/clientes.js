@@ -218,16 +218,17 @@ function adicionarEventoEdicao(){
     });
 }
 const modal = document.getElementById("myModal");
-const openModalBtn = document.getElementById("novoCliente");
+// const openModalBtn = document.getElementById("novoCliente"); //aqui chamou a div e nao o button de fato
+const openModalBtn = document.getElementById("btn-cadastro-novo-cliente");
 const closeModalBtn = document.getElementById("closeButton");
 const editOpenModalBtn = document.getElementsByClassName("cartao-editar")[0];
 
+// modal.showModal(); //excluir depois
 
 document.getElementById("novoCliente").addEventListener("click", () => {
     document.getElementById("formNovoCliente").reset();
     veiculosTemp = [];
 });
-
 
 openModalBtn.addEventListener("click", () => modal.showModal());
 closeModalBtn.addEventListener("click", () => modal.close());

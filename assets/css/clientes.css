@@ -1,3 +1,7 @@
+:root {
+    --border-radius: 10px;
+}
+
 .container-titulo-btn-novo-cliente {
     display: flex;
     justify-content: space-between;
@@ -164,4 +168,138 @@
     font-size: 0.75rem;
     font-weight: 400;
     color: #000;
+}
+
+/* modal */
+#myModal {
+    margin: 60px auto;
+    width: 100%;
+    max-width: 682px;
+    border: none;
+    border-radius: 10px;
+    padding: 36px;
+    background-color: #D9D9D9;
+}
+
+#myModal::backdrop {
+    background-color: rgba(0, 0, 0, 0.6);
+}
+
+#novoCliente {
+    margin: 0;
+    font-size: 1.75rem;
+    font-weight: 900;
+    color: #000;
+    margin-block-end: 10px;
+}
+
+.modal-subtitulo {
+    font-size: 1rem;
+    font-weight: 900;
+    color: #666;
+}
+
+#formNovoCliente {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-block-start: 32px;
+}
+
+.modal-container-form-componente {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.modal-label {
+    font-weight: 700;
+    color: #000;
+}
+
+.modal-input {
+    font-family: 'inter', sans-serif;
+    width: 100%;
+    padding: 13px 12px;
+    border-radius: var(--border-radius);
+    border: 2px solid #666;
+    outline: none;
+    font-size: 1rem;
+    font-weight: 900;
+    color: #000;
+    background-color: transparent;
+    resize: vertical;
+}
+
+.modal-input::placeholder {
+    color: #818181; /* fonte do placeholder */
+    font-weight: 900;
+}
+
+.linha-veiculos {
+    display: flex;
+    gap: 12px;
+    width: 100%;
+    /* margin-block: 8px 0; */
+}
+
+.linha-veiculos #campoModelo,
+.linha-veiculos #campoPlaca {
+    max-width: 214px;
+}
+
+#btnAddVeiculo {
+    padding: 16px;
+    background-color: rgba(129, 129, 129, 0.5);
+    color: #FFF;
+    font-weight: 900;
+    border-radius: var(--border-radius);
+    border: 0;
+    cursor: pointer;
+}
+
+#listaVeiculos {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.badge-veiculo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background-color: rgba(107, 107, 107, 0.5);
+  color: #000;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 11px 15px;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+}
+
+.btn-salvar-container {
+  display: flex;
+  justify-content: flex-end;
+}
+
+#cadastrar {
+  margin-top: 36px;
+  padding: 12px 16px;
+  border: none;
+  border-radius: var(--border-radius);
+  background-color: #337D1C;
+  color: #FFF;
+  font-weight: 900;
+  font-size: 0.825rem;
+  cursor: pointer;
+}
+
+#closeButton {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

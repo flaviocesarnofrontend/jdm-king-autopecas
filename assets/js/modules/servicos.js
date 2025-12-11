@@ -1,4 +1,4 @@
-import { clientes, servicos } from "./storage.js";
+import { clientes, servicos, atualizarClientes } from "./storage.js";
 import { getPecas, getTotal, resetPecas } from "./pecas.js";
 import { getClasseStatus, formatStatus, mostrarToast } from "./status.js";
 import { closeModal } from "./modal.js"; // modal.js will export closeModal
@@ -9,6 +9,7 @@ export function salvarServico() {
 
   const clienteId = document.getElementById("novo-servico-cliente-select").value;
   const veiculoId = document.getElementById("novo-servico-cliente-carro-select").value;
+  
   const descricaoPedido = document.getElementById("novo-servico-descricao-pedido").value;
   const descricaoExecucao = document.getElementById("novo-servico-descricao-execucao").value;
   const tipoServicoTexto = document.getElementById("novo-servico-select").selectedOptions[0].textContent;
@@ -21,8 +22,8 @@ export function salvarServico() {
 
   const servico = {
     id: Date.now(),
-    clienteId,
-    veiculoId,
+    clienteId: Number(clienteId),
+    veiculoId: Number(veiculoId),
     tipoServico: tipoServicoTexto, 
     pedido: descricaoPedido,
     execucao: descricaoExecucao,
@@ -31,16 +32,19 @@ export function salvarServico() {
     total: getTotal() ?? 0
   };
 
-  // salva no array e localStorage
   servicos.push(servico);
-  servicos.sort((a, b) => b.id - a.id);
+
   localStorage.setItem("servicos", JSON.stringify(servicos));
 
-  // reset das peças e modal
+  // reset
   resetPecas();
 
+  document.getElementById("valor-total").innerText = "R$ 0,00";
+
+  atualizarClientes();
   closeModal();
   carregarServicos();
+
 }
 
 export function editarServico(id) {
@@ -107,7 +111,11 @@ export function salvarEdicaoServico(id) {
 export function excluirServico(id) {
   if (!confirm("Tem certeza que deseja excluir esta OS?")) return;
 
-  servicos = servicos.filter(s => s.id != id);
+  const filtrados = servicos.filter(s => s.id != id);
+
+  servicos.length = 0;        // esvazia mantendo a referência original
+  servicos.push(...filtrados); // repopula mantendo a referência
+
   localStorage.setItem("servicos", JSON.stringify(servicos));
   carregarServicos();
 }
@@ -115,6 +123,7 @@ export function excluirServico(id) {
 
 // render / listar
 export function carregarServicos() {
+  servicos.sort((a, b) => b.id - a.id);
   renderizarServicos(servicos);
 }
 
@@ -128,7 +137,8 @@ export function renderizarServicos(lista) {
 
     const cliente = clientes.find(c => c.id == servico.clienteId) || { nome: "—" };
     const veiculo = (cliente.veiculos || []).find(v => v.id == servico.veiculoId) || { modelo: "-", placa: "-" };
-
+    console.log(veiculo);
+    
     container.innerHTML += `
         <div class="cartao">
             <div class="cartao-componentes-preco">
@@ -231,4 +241,3 @@ window.__alterarStatus = alterarStatus;
 
 // quando o módulo é importado, carrega serviços imediatamente
 carregarServicos();
-

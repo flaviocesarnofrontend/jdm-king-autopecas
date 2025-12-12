@@ -44,8 +44,6 @@ export function initLocalStorage() {
   }
 }
 
-
-// 🔄 Sincroniza CLIENTES do localStorage → memória
 export function atualizarClientes() {
   const dados = JSON.parse(localStorage.getItem("clientes"));
   if (Array.isArray(dados)) {
@@ -54,7 +52,6 @@ export function atualizarClientes() {
   }
 }
 
-// 🔄 Sincroniza SERVIÇOS do localStorage → memória
 export function atualizarServicos() {
   const dados = JSON.parse(localStorage.getItem("servicos"));
   if (Array.isArray(dados)) {

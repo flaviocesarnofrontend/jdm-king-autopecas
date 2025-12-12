@@ -450,6 +450,18 @@
 }
 
 @media screen and (min-width: 50rem) /* 800px */ {
+    .container-titulo {
+        gap: 12px;
+    }
+    
+    .titulo {
+        font-size: 2.625rem;
+    }
+
+    .sub-titulo {
+        font-size: 1.125rem;
+    }
+
     .container-btn {
         margin: 0;
     }
@@ -457,14 +469,38 @@
         flex-direction: row;
         justify-content: space-between;
         align-items: flex-start;
+        margin-block: 38px 52px;
+    }
+
+    #busca {
+        padding: 19px 12px 19px 56px;
+        background-size: 18px 18px;
+        font-size: 1rem;
+        background-position: 18px center;
+    }
+
+    #busca::placeholder {
+        color: #999;
+        font-weight: 900;
     }
 
     .modal {
         margin-inline: 60px;
     }
 
+    .cartoes {
+        margin-block: 52px;
+        gap: 24px;
+    }
+
     .cartao {
         padding: 32px;
+        margin: 0;
+    }
+
+    .cartao + .cartao {
+        margin-block: 0;
+        margin: 0;
     }
 
     .cartao-dados-cliente-container {

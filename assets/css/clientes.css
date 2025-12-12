@@ -78,7 +78,7 @@
 }
 
 .cartoes {
-    margin-block-start: 52px;
+    margin-block: 52px;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
     gap: 24px;

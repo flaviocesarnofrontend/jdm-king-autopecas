@@ -82,8 +82,7 @@
     padding: 34px 32px;
     display: flex;
     flex-direction: column;
-    overflow-y: auto;
-}
+} 
 
 .cartoes {
     margin-block-start: 52px;
@@ -91,7 +90,6 @@
     flex-wrap: wrap;
     gap: 24px;
     max-height: 100%;
-    overflow-y: auto;
 }
 
 .cartao-titulo {
@@ -161,3 +159,4 @@
     margin: 15px;
 
 }
+

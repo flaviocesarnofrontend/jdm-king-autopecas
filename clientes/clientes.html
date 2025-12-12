@@ -129,7 +129,6 @@
                 <p class="modal-subtitulo">Preencha os dados do cliente para cadastro no sistema</p>
         
                 <form id="formNovoCliente">
-        
                     <div class="modal-container-form-componente">
                         <label class="modal-label">Nome completo</label>
                         <input class="modal-input" type="text" name="nome" placeholder="Digite o nome completo" required>
@@ -152,20 +151,20 @@
         
                     <div class="modal-container-form-componente">
                         <label class="modal-label">Veículo(s)</label>
-                        <div class="linha-veiculos">
-                            <input class="modal-input" type="text" id="campoModelo" placeholder="Modelo">
+                    <div class="linha-veiculos">
+                        <input class="modal-input" type="text" id="campoModelo" placeholder="Modelo">
                             <input class="modal-input" type="text" id="campoPlaca" placeholder="Placa" maxlength="7">
                             <button id="btnAddVeiculo" type="button" class="btn-add">
                                 <img src="../assets/img/clientes/adicionar-icon.svg" alt="Adicionar veículo">
                             </button>
-                        </div>
-                        <div id="listaVeiculos" class="lista-veiculos"></div>
                     </div>
         
-                    <div class="btn-salvar-container">
-                        <button type="submit" class="btn-salvar" id="cadastrar">Cadastrar</button>
-                    </div>
-        
+                    <div id="listaVeiculos" class="lista-veiculos"></div>
+                </div>
+                
+                <div class="btn-salvar-container">
+                <button type="submit" class="btn-salvar" id="cadastrar">Cadastrar</button>
+                </div>
                 </form>
             </div>
           </dialog>

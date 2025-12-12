@@ -14,13 +14,7 @@ btnAdd?.addEventListener("click", () => {
         return;
     }
 
-    // veiculosTemp.push({ modelo, placa });
-    //agora os veículos possuem ID, isso ajuda na integração com a página de serviços
-    veiculosTemp.push({
-        id: Date.now() + Math.floor(Math.random() * 1000), // id único
-        modelo,
-        placa
-    });
+    veiculosTemp.push({ modelo, placa });
 
     const item = document.createElement("div");
     item.classList.add("badge-veiculo");
@@ -170,7 +164,8 @@ function exibirDados(dados) {
 
 
 function excluirDados(id){
-    let clientes = JSON.parse(localStorage.getItem("clientes")) || [];
+    
+    clientes = JSON.parse(localStorage.getItem("clientes")) || [];
     const armazenados = JSON.parse(localStorage.getItem("clientes")) || [];
 
     clientes = armazenados.filter(c => c.id != id);
@@ -216,8 +211,7 @@ function adicionarEventoEdicao(){
             veiculosTemp.forEach(v => {
                 const item = document.createElement("div");
                 item.classList.add("badge-veiculo");
-                // item.innerText = `${v.veiculos} - ${v.placa}`;
-                item.innerText = `${v.modelo} - ${v.placa}`;
+                item.innerText = `${v.veiculos} - ${v.placa}`;
                 listaVeiculos.appendChild(item);
             });
             modal.showModal();
@@ -225,17 +219,16 @@ function adicionarEventoEdicao(){
     });
 }
 const modal = document.getElementById("myModal");
-// const openModalBtn = document.getElementById("novoCliente"); //aqui chamou a div e nao o button de fato
-const openModalBtn = document.getElementById("btn-cadastro-novo-cliente");
+const openModalBtn = document.getElementById("novoCliente");
 const closeModalBtn = document.getElementById("closeButton");
 const editOpenModalBtn = document.getElementsByClassName("cartao-editar")[0];
 
-// modal.showModal(); //excluir depois
 
 document.getElementById("novoCliente").addEventListener("click", () => {
     document.getElementById("formNovoCliente").reset();
     veiculosTemp = [];
 });
+
 
 openModalBtn.addEventListener("click", () => modal.showModal());
 closeModalBtn.addEventListener("click", () => modal.close());

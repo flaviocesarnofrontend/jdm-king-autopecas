@@ -17,7 +17,7 @@
     <header class="gtrewq con1238">
         <img class="oiwujmnh" src="../assets/img/global/logo-banner.svg" alt="">
         <nav class="nav-a123asjqu">
-            <a href="../clientes/clientes.html" class="nav-link-aqweasdjh">
+            <a href="#" class="nav-link-aqweasdjh">
                 <img class="oiwujmnh icon-qyshansd" src="../assets/img/global/icons/clientes-icon.svg" alt="Clientes">
                 <span>Clientes</span>
             </a>
@@ -25,7 +25,7 @@
                 <img class="oiwujmnh icon-qyshansd" src="../assets/img/global/icons/servicos-icon.svg" alt="Serviços">
                 <span>Serviços</span>
             </a>
-            <a href="#" class="nav-link-aqweasdjh">
+            <a href="../vendas/vendas.html" class="nav-link-aqweasdjh">
                 <img class="oiwujmnh icon-qyshansd" src="../assets/img/global/icons/vendas-icon.svg" alt="Vendas">
                 <span>Vendas</span>
             </a>
@@ -53,20 +53,22 @@
         <div class="cartoes">
 
             <div class="cartao">
-                <h2 class="cartao-titulo">Histórico de Vendas</h2>
-                <!-- primeiro produto -->
-                <div class="cartao-item-lista">
-                    <div class="container-agrupar">
-                        <p class="cartao-produtos">Óleo 5W30</p>
-                        <div class="">
-                            <span>Qtd: 4</span>
-                            <span class="detalhe-historico">Unit: R$45,00</span>
-                            <span class="detalhe-historico">Cliente: João Silva-123.456.789.00</span>
+                <div class="cartao-Container-Vendas">
+                    <h2 class="cartao-titulo">Histórico de Vendas</h2>
+                    <!-- primeiro produto -->
+                    <div class="cartao-item-lista">
+                        <div class="container-agrupar">
+                            <p class="cartao-produtos">Óleo 5W30</p>
+                            <div class="">
+                                <span>Qtd: 4</span>
+                                <span class="detalhe-historico">Unit: R$45,00</span>
+                                <span class="detalhe-historico">Cliente: João Silva-123.456.789.00</span>
+                            </div>
                         </div>
-                    </div>
-                    <div class="valor">
-                        <p class="cp">R$180,00</p>
-                        <p class="data">27/11/2025</p>
+                        <div class="valor">
+                            <p class="cp">R$180,00</p>
+                            <p class="data">27/11/2025</p>
+                        </div>
                     </div>
                 </div>
                 <!-- segundo produto -->
@@ -109,9 +111,43 @@
 
             </div>
 
-    </main>
-    <script src="../assets/js/vendas.js"></script>
+            <dialog id="modalNovaVendas" class="modal-vendas">
+                <div class="modal-content">
+                    <button class="modal-close" id="closeVenda">&times; </button>
+                        <h2 class="modal-title">Nova Venda</h2>
+                        <p class="modal-sub">Registre uma venda avulsa de peças</p>
 
+                        <form id="formNovaVendas">
+                            <label for="selectPeca">Peças</label>
+                            <select id="selectPeca" required>
+                                <option value=""Selecione a peca do estoque></option>
+                            </select>
+
+                            <label for="inputQtd">Quantidade</label>
+                            <input type="number" id="inputQtd" value="1" required>
+
+                            <label for="selectCliente">Cliente</label>
+                            <select id="selectCliente" required>
+                                <option value="">Selecione um cliente</option>
+                            </select>
+
+                            <div class="total-row">
+                                <span>Total:</span>
+                                <strong id="spanTotal">R$ 0,00</strong>
+                            </div>
+
+                            <div class="modal-actions">
+                                <button type="button" id="btnCancelarVenda">Cancelar</button>
+                                <button type="submit" id="btnRegistrarVenda" class="btn-confirm">Registrar Vendas</button>
+                            </div>
+                        </form>
+                </div>
+            </dialog>
+
+    </main>    
+
+    <script src="../assets/js/mockVendas.js"></script>
+    <script src="../assets/js/vendas.js"></script>
 
 </body>
 

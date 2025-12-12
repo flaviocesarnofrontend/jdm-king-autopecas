@@ -1,319 +1,143 @@
-// const moedaBr = (n) => n.toLocalString("pt-BR", {style: "currency", currency: "BRL"});
-const hojeFormat = () => new Date().toLocaleDateString("pt-BR");
+
+
+const moedaBr = (n) =>
+    Number(n).toLocaleString("pt-BR", {
+        style: "currency",
+        currency: "BRL",
+    });
+
+const hojeFormat = () =>
+    new Date().toLocaleDateString("pt-BR");
 
 let estoque = JSON.parse(localStorage.getItem("estoque")) || [];
-//let clientes = JSON.parse(localStorage.getItem("clientes")) || [];
+let clientes = JSON.parse(localStorage.getItem("clientes")) || [];
 let vendas = JSON.parse(localStorage.getItem("vendas")) || [];
 
+const modal = document.getElementById("modalNovaVendas");
 const btnNovaVenda = document.querySelector(".btn-novo-vendas");
-const modalVendas = document.getElementById("modalNovaVendas");
-const closeVenda = document.getElementById("closeVenda");
-const formVendas = document.getElementById("formNovaVendas");
+const btnClose = document.getElementById("closeVenda");
+
 const selectPeca = document.getElementById("selectPeca");
-const inputQtd = document.getElementById("inputQtda");
-const spanTotal = document.getElementById("spanTotal");
 const selectCliente = document.getElementById("selectCliente");
-const btnCancelarVenda = document.getElementById("btnCancelarVenda");
-const containerHistorico = document.querySelector(".cartoes");
+const inputQtd = document.getElementById("inputQtd");
+const spanTotal = document.getElementById("spanTotal");
 
-function popularSelects(){
-    selectPeca.innerHTML = `<option value=""> Selecione a peça do estoque</option>`;
-    selectCliente.innerHTML = `<option value=""> Selecione um cliente</option>`;
+btnNovaVenda.addEventListener("click", () => modal.showModal());
+btnClose.addEventListener("click", () => modal.close());
 
-    estoque.array.forEach(item => {
-        const opt= document.createElement("option");
-        opt.value = clientes.id || clientes.nome;
-        opt.textContent = clientes.nome;
-        selectCliente.appendChild(opt);
+document.getElementById("btnCancelarVenda").addEventListener("click", () => {
+    modal.close();
+});
+
+
+function carregarPecas() {
+    selectPeca.innerHTML = `<option value="">Selecione a peça</option>`;
+
+    estoque.forEach((p) => {
+        const op = document.createElement("option");
+        op.value = p.id;
+        op.textContent = `${p.nome} — ${moedaBr(p.valor)}`;
+        op.dataset.valor = p.valor;
+        selectPeca.appendChild(op);
     });
 }
 
-function atualizarTotal(){
-    const pecaId = Number(selectPeca.value);
+function carregarClientes() {
+    selectCliente.innerHTML = `<option value="">Selecione o cliente</option>`;
+
+    clientes.forEach((c) => {
+        const op = document.createElement("option");
+        op.value = c.id;
+        op.textContent = `${c.nome} — ${c.cpf}`;
+        selectCliente.appendChild(op);
+    });
+}
+
+function atualizarTotal() {
+    const peca = selectPeca.selectedOptions[0];
     const qtd = Number(inputQtd.value) || 0;
 
-    if(!pecaId || qtd <= 0){
-        spanTotal.textContent = "R$ 0,00";
+    if (!peca || !peca.dataset.valor) {
+        spanTotal.textContent = moedaBr(0);
         return;
     }
 
-    const p = estoque.find(i => i.id === pecaId);
-    if(!p){
-        spanTotal.textContent = "R$ 0,00";
-        return;
-    }
-
-    spanTotal.textContent = (p.preco * qtd);
+    const valor = Number(peca.dataset.valor);
+    spanTotal.textContent = moedaBr(valor * qtd);
 }
 
-function renderHistorico(){
-    containerHistorico.innerHTML = "";
-    const card = document.createElement("div");
-    card.classList.add("cartao");
-    const titulo = document.createElement("h2");
-    titulo.classList.add("cartao-titulo");
-    titulo.textContent = "Histórico de Vendas";
-    card.appendChild(titulo);
+selectPeca.addEventListener("change", atualizarTotal);
+inputQtd.addEventListener("input", atualizarTotal);
 
-    if(!vendas.length){
-        const p = document.createElement("p");
-        p.style.opacity = 0.7;
-        p.textContent = "Nenhuma venda registrada.";
-        card.appendChild(p);
-        containerHistorico.appendChild(card);
+document.getElementById("formNovaVendas").addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    const idPeca = selectPeca.value;
+    const idCliente = selectCliente.value;
+    const qtd = Number(inputQtd.value);
+
+    if (!idPeca || !idCliente || qtd <= 0) {
+        alert("Preencha todos os campos!");
         return;
     }
 
-    vendas.slice().reverse().forEach(v => {
+    const pecaInfo = estoque.find((p) => p.id == idPeca);
+    const clienteInfo = clientes.find((c) => c.id == idCliente);
+
+    const venda = {
+        id: vendas.length + 1,
+        peca: pecaInfo.nome,
+        valorUnit: pecaInfo.preco,
+        quantidade: pecaInfo.quantidade,
+        cliente: clienteInfo.nome,
+        cpf: clienteInfo.cpf,
+        total: qtd * pecaInfo.valor,
+        data: hojeFormat(),
+    };
+
+    vendas.push(venda);
+
+    localStorage.setItem("vendas", JSON.stringify(vendas));
+
+    alert("Venda registrada com sucesso!");
+    modal.close();
+
+    renderHistorico();
+});
+
+function renderHistorico() {
+    const container = document.querySelector(".cartao");
+    container.innerHTML = `
+        <div class="cartao-Container-Vendas">
+            <h2 class="cartao-titulo">Histórico de Vendas</h2>
+        </div>
+    `;
+
+    vendas.forEach((v) => {
         const item = document.createElement("div");
         item.classList.add("cartao-item-lista");
+        console.log(v)
+        item.innerHTML = `
+            <div class="container-agrupar">
+                <p class="cartao-produtos">${v.nomeProduto}</p>
+                <div>
+                    <span>Qtd: ${v.quantidade}</span>
+                    <span class="detalhe-historico">Unit: ${moedaBr(v.valorUnidade)}</span>
+                    <span class="detalhe-historico">
+                        Cliente: ${v.cliente.nome} - ${v.cliente.cpf}
+                    </span>
+                </div>
+            </div>
+            <div class="valor">
+                <p class="cp">R$ ${(v.quantidade * v.valorUnidade).toFixed(2)}</p>
+                <p class="data">${v.data}</p>
+            </div>
+        `;
 
-        const left = document.createElement("div");
-        left.classList.add("container-agrupar");
-
-        const nomePeca = document.createElement("p");
-        nomePeca.classList.add("cartao-produto")
-        nomePeca.textContent = v.nomeProduto ||v.pecaNome || "Produto";
-
-        const dados = document.createElement("div");
-
-        const spanQtd = document.createElement("span");
-        spanQtd.textContent = `Qtd: ${v.quatidade}`;
-        
-        const spanUnit = document.createElement("span");
-        spanUnit.classList.add("detalhe-historico");
-        spanUnit.textContent = `Unit: ${v.valorUnidade * v.precoUnitario || 0}`;
-
-        const spanCli = document.createElement("span");
-        spanCli.classList.add("detalhe-historico");
-        spanCli.textContent = `Cliente: ${v.cliente?.nome || v.clienteNome || " - "}`;
-
-        dados.appendChild(spanQtd);
-        dados.appendChild(spanUnit);
-        dados.appendChild(spanCli);
-
-        left.appendChild(nomePeca);
-        left.appendChild(dados);
-
-        const right = document.createElement("div");
-        right.classList.add("valor");
-
-        const cp = document.createElement("p");
-        cp.classList.add("cp");
-        cp.textContent = v.cp ;
-
-        
-        const data = document.createElement("p");
-        data.classList.add("data");
-        data.textContent = v.data || hojeFormat();
-
-        right.appendChild(cp);
-        right.appendChild(data);
-
-        const actions = document.createElement("div");
-        actions.classList.add("acoes-historico");
-
-        const btnEditar = document.createElement("button");
-        btnEditar.classList.add("btn-editar-venda");
-        btnEditar.dataset.id = v.id;
-
-        const btnExcluir = document.createElement("button");
-        btnExcluir.classList.add("btn-excluir-venda");
-        btnExcluir.dataset.id = v.id;
-
-        actions.appendChild(btnEditar);
-        actions.appendChild(btnExcluir);
-
-        item.appendChild(left);
-        item.appendChild(right);
-        item.appendChild(actions);
-
-        card.appendChild(item);
+        container.appendChild(item);
     });
-
-    containerHistorico.appendChild(card);
-
-    document.querySelectorAll(".btn-excluir-vend").forEach(b =>{
-        b.addEventListener("click", (e) => {
-            const id = Number(b.dataset.id);
-            if(confirm("Deseja excluir esta venda?")){
-                excluirVenda(id);
-            }
-        });
-    });
-
-    document.querySelectorAll(".btn-editar-venda").forEach(b => {
-    b.addEventListener("click", (e) => {
-      const id = Number(b.dataset.id);
-      abrirEdicaoVenda(id);
-    });
-  });
 }
 
-function excluirVenda(id) {
-  vendas = vendas.filter(v => v.id !== id);
-  localStorage.setItem("vendas", JSON.stringify(vendas));
-  renderHistorico();
-}
-
-let vendaEditandoId = null;
-function abrirEdicaoVenda(id) {
-  const v = vendas.find(x => x.id === id);
-  if (!v) return alert("Venda não encontrada.");
-  estoque = JSON.parse(localStorage.getItem("estoque")) || estoque;
-  clientes = JSON.parse(localStorage.getItem("clientes")) || clientes;
-  popularSelects();
-
-  const peca = estoque.find(p => p.nome === v.nomeProduto) || estoque.find(p => p.id === v.pecaId);
-  if (peca) selectPeca.value = peca.id;
-  else {
-    // Aqui ele vai criar uma opção temporário do nome produto.
-    const tmp = document.createElement("option");
-    tmp.value = "tmp";
-    tmp.textContent = `${v.nomeProduto} (produto não encontrado no estoque)`;
-    selectPeca.prepend(tmp);
-    selectPeca.value = "tmp";
-  }
-
-  inputQtd.value = v.quantidade;
-
-   const clienteObj = clientes.find(c => (c.nome === (v.cliente?.nome || v.clienteNome)));
-  if (clienteObj) selectCliente.value = clienteObj.id;
-  else {
-    const tmpc = document.createElement("option");
-    tmpc.value = "tmpc";
-    tmpc.textContent = `${v.cliente?.nome || v.clienteNome} (cliente não encontrado)`;
-    selectCliente.prepend(tmpc);
-    selectCliente.value = "tmpc";
-  }
-  
-  atualizarTotal();
-  vendaEditandoId = id;
-  modalVendas.showModal();
-}
-function salvarEdicaoVenda(e) {
-  e.preventDefault();
-  const id = vendaEditandoId;
-  if (!id) return;
-
-  const pecaId = Number(selectPeca.value);
-  const qtd = Number(inputQtd.value) || 0;
-  const clienteId = selectCliente.value;
-
-  if (!pecaId || pecaId === 0) { alert("Selecione uma peça válida."); return; }
-  if (qtd <= 0) { alert("Quantidade inválida."); return; }
-  if (!clienteId) { alert("Selecione um cliente."); return; }
-
-  // Ele vai encontrar a peça no estoque
-  const peca = estoque.find(i => i.id === pecaId);
-  const clienteObj = clientes.find(c => String(c.id) === String(clienteId));
-
-  const total = peca.preco * qtd;
-
-  // Aqui ele vai atualizar as vendas no array
-  vendas = vendas.map(v => {
-    if (v.id === id) {
-      return {
-        ...v,
-        pecaId,
-        nomeProduto: peca.nome,
-        quantidade: qtd,
-        valorUnidade: peca.preco,
-        total,
-        clienteId: clienteObj?.id,
-        cliente: clienteObj ? { nome: clienteObj.nome, cpf: clienteObj.cpf } : v.cliente,
-        data: hojeFormat()
-      };
-    }
-    return v;
-  });
-
-  localStorage.setItem("vendas", JSON.stringify(vendas));
-  vendaEditandoId = null;
-  modalVendas.close();
-  renderHistorico();
-}
-
-function registrarVenda(event) {
-  event.preventDefault();
-
-  estoque = JSON.parse(localStorage.getItem("estoque")) || estoque;
-  clientes = JSON.parse(localStorage.getItem("clientes")) || clientes;
-  vendas = JSON.parse(localStorage.getItem("vendas")) || vendas;
-
-  const pecaId = Number(selectPeca.value);
-  const clienteId = Number(selectCliente.value);
-  const quantidade = Number(inputQtd.value) || 0;
-
-  if (!pecaId) { alert("Selecione uma peça."); return; }
-  if (!clienteId) { alert("Selecione um cliente."); return; }
-  if (quantidade <= 0) { alert("Quantidade inválida."); return; }
-
-  const peca = estoque.find(i => i.id === pecaId);
-  const clienteObj = clientes.find(c => c.id === clienteId);
-
-  if (!peca) { alert("Peça inválida."); return; }
-  if (peca.quantidade < quantidade) { alert("Estoque insuficiente."); return; }
-
-  const total = Number((peca.preco * quantidade).toFixed(2));
-  const venda = {
-    id: Date.now(),
-    pecaId,
-    nomeProduto: peca.nome,
-    quantidade,
-    valorUnidade: peca.preco,
-    total,
-    clienteId: clienteObj?.id,
-    cliente: clienteObj ? { nome: clienteObj.nome, cpf: clienteObj.cpf } : { nome: "Cliente não identificado", cpf: "" },
-    data: hojeFormat()
-  };
-
-  // Aqui eu vou atualizar o estoque!
-  peca.quantidade = peca.quantidade - quantidade;
-  estoque = estoque.map(i => i.id === peca.id ? peca : i);
-  localStorage.setItem("estoque", JSON.stringify(estoque));
-
-  vendas.push(venda);
-  localStorage.setItem("vendas", JSON.stringify(vendas));
-
-  renderHistorico();
-  popularSelects();
-  modalVendas.close();
-  formVendas.reset();
-  inputQtd.value = 1;
-  spanTotal.textContent = "R$ 0,00";
-  alert("Venda registrada com sucesso!");
-}
-
-btnNovaVenda?.addEventListener("click", () => {
-  // Vai meio que fazer uma atuailização
-  estoque = JSON.parse(localStorage.getItem("estoque")) || estoque;
-  clientes = JSON.parse(localStorage.getItem("clientes")) || clientes;
-  vendas = JSON.parse(localStorage.getItem("vendas")) || vendas;
-
-  popularSelects();
-  inputQtd.value = 1;
-  spanTotal.textContent = "R$ 0,00";
-  vendaEditandoId = null;
-  modalVendas.showModal();
-});
-closeVenda?.addEventListener("click", () => {
-  modalVendas.close();
-});
-btnCancelarVenda?.addEventListener("click", () => {
-  modalVendas.close();
-});
-
-selectPeca?.addEventListener("change", atualizarTotal);
-inputQtd?.addEventListener("input", atualizarTotal);
-
-formVendas?.addEventListener("submit", (e) => {
-  if (vendaEditandoId) {
-    salvarEdicaoVenda(e);
-  } else {
-    registrarVenda(e);
-  }
-});
-
+carregarPecas();
+carregarClientes();
 renderHistorico();
-

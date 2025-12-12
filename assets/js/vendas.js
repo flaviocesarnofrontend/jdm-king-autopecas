@@ -120,10 +120,10 @@ function renderHistorico() {
         item.innerHTML = `
             <div class="container-agrupar">
                 <p class="cartao-produtos">${v.nomeProduto}</p>
-                <div>
+                <div class="produtos-detalhes-container">
                     <span>Qtd: ${v.quantidade}</span>
-                    <span class="detalhe-historico">Unit: ${moedaBr(v.valorUnidade)}</span>
-                    <span class="detalhe-historico">
+                    <span>Unit: ${moedaBr(v.valorUnidade)}</span>
+                    <span>
                         Cliente: ${v.cliente.nome} - ${v.cliente.cpf}
                     </span>
                 </div>

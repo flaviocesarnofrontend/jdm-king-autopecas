@@ -25,10 +25,10 @@ const estoqueMock = [
 ];
 
 
-// if(!localStorage.getItem("estoque")){
-//   estoqueMock.forEach((d, index) => d.id = index + 1);
-//   localStorage.setItem("estoque", JSON.stringify(estoqueMock));
-// }
+ if(!localStorage.getItem("estoque")){
+   estoqueMock.forEach((d, index) => d.id = index + 1);
+   localStorage.setItem("estoque", JSON.stringify(estoqueMock));
+ }
 
 if(!localStorage.getItem("vendas")){
   vendasMock.forEach((c, index) => c.id = index + 1);

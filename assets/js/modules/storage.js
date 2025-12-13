@@ -9,27 +9,27 @@ export function initLocalStorage() {
   if (!localStorage.getItem("clientes")) {
 
     const clientesIniciais = [
-      {
-        id: 1,
-        nome: "João Silva",
-        cpf: "12345678910",
-        email: "joao@email.com",
-        telefone: "11 99999-8888",
-        veiculos: [
-          { id: 1, modelo: "Honda Civic", placa: "ABC-1234" },
-          { id: 2, modelo: "Gol 1.6", placa: "DEF-5678" }
-        ]
-      },
-      {
-        id: 2,
-        nome: "Maria Santos",
-        cpf: "12345678910",
-        email: "maria@email.com",
-        telefone: "11 98888-7777",
-        veiculos: [
-          { id: 1, modelo: "Fusca 78", placa: "GHI-2222" }
-        ]
-      }
+      // {
+      //   id: 1,
+      //   nome: "João Silva",
+      //   cpf: "12345678910",
+      //   email: "joao@email.com",
+      //   telefone: "11 99999-8888",
+      //   veiculos: [
+      //     { id: 1, modelo: "Honda Civic", placa: "ABC-1234" },
+      //     { id: 2, modelo: "Gol 1.6", placa: "DEF-5678" }
+      //   ]
+      // },
+      // {
+      //   id: 2,
+      //   nome: "Maria Santos",
+      //   cpf: "12345678910",
+      //   email: "maria@email.com",
+      //   telefone: "11 98888-7777",
+      //   veiculos: [
+      //     { id: 1, modelo: "Fusca 78", placa: "GHI-2222" }
+      //   ]
+      // }
     ];
 
     localStorage.setItem("clientes", JSON.stringify(clientesIniciais));

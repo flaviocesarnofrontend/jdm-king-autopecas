@@ -36,8 +36,8 @@ function carregarPecas() {
     estoque.forEach((p) => {
         const op = document.createElement("option");
         op.value = p.id;
-        op.textContent = `${p.nome} — ${moedaBr(p.valor)}`;
-        op.dataset.valor = p.valor;
+        op.textContent = `${p.nome} — ${moedaBr(p.preco)}`;
+        op.dataset.preco = p.preco;
         selectPeca.appendChild(op);
     });
 }
@@ -57,12 +57,12 @@ function atualizarTotal() {
     const peca = selectPeca.selectedOptions[0];
     const qtd = Number(inputQtd.value) || 0;
 
-    if (!peca || !peca.dataset.valor) {
+    if (!peca || !peca.dataset.preco) {
         spanTotal.textContent = moedaBr(0);
         return;
     }
 
-    const valor = Number(peca.dataset.valor);
+    const valor = Number(peca.dataset.preco);
     spanTotal.textContent = moedaBr(valor * qtd);
 }
 
@@ -91,7 +91,7 @@ document.getElementById("formNovaVendas").addEventListener("submit", (e) => {
         quantidade: pecaInfo.quantidade,
         cliente: clienteInfo.nome,
         cpf: clienteInfo.cpf,
-        total: qtd * pecaInfo.valor,
+        total: qtd * pecaInfo.preco,
         data: hojeFormat(),
     };
 

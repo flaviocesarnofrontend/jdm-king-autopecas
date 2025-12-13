@@ -160,3 +160,153 @@
     /* align-items: flex-end; */
     margin-right: 12px;
 }
+
+/* Modal Vendas  */
+.modal-vendas {
+    border: none;
+    padding: 0;
+    width: 520px;
+    max-width: 90%;
+    border-radius: 12px;
+    background: #e5e5e5;
+    margin: 60px auto;
+}
+
+.modal-vendas::backdrop {
+    background: rgba(0, 0, 0, 0.6);
+}
+
+.modal-content {
+    padding: 32px;
+    position: relative;
+    font-family: "Inter", sans-serif;
+}
+
+.modal-title {
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 6px;
+    color: #000;
+}
+
+.modal-sub {
+    color: #666;
+    font-size: 14px;
+    margin-bottom: 24px;
+}
+
+.modal-close {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content label {
+    font-size: 15px;
+    font-weight: 600;
+    display: block;
+    margin-bottom: 6px;
+}
+
+.modal-content input,
+.modal-content select {
+    width: 100%;
+    padding: 14px;
+    border-radius: 8px;
+    border: 2px solid #2d2d2d;
+    font-size: 15px;
+    background: #fff;
+    margin-bottom: 18px;
+    outline: none;
+}
+
+.modal-content input::placeholder,
+.modal-content select::placeholder {
+    color: #b3b3b3;
+}
+
+.total-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 18px;
+    margin: 25px 0 12px 0;
+}
+
+.total-row strong {
+    font-size: 20px;
+}
+
+.modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 14px;
+    margin-top: 24px;
+}
+
+.modal-actions button {
+    padding: 12px 18px;
+    font-size: 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    border: none;
+}
+
+#btnCancelarVenda {
+    background: #d1d1d1;
+}
+
+.btn-confirm {
+    background: #1f8d2e;
+    color: white;
+    font-weight: 600;
+}
+
+.btn-confirm:hover {
+    background: #187026;
+}
+
+#btnCancelarVenda:hover {
+    background: #bdbdbd;
+}
+
+.quantidadeTotal {
+    display: flex;
+    align-items: stretch; /* 🔥 isso resolve o alinhamento */
+    gap: 14px;
+    margin-bottom: 26px;
+}
+
+#inputQtd {
+    width: 90px;
+    height: 52px;
+    padding: 0 12px;
+    border-radius: 8px;
+    border: 1px solid #9d9d9d;
+    background: #ececec;
+    font-size: 16px;
+}
+
+.total-row {
+    flex: 1;
+    height: 52px;
+    background: #9c9c9c;
+    border-radius: 8px;
+    padding: 0 18px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    font-size: 16px;
+}
+
+.total-row strong {
+    font-size: 18px;
+    font-weight: 700;
+}
+

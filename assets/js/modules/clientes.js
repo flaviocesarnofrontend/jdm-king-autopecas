@@ -53,7 +53,7 @@ if (selectClienteEl) {
       return;
     }
 
-    containerVeiculo.style.display = "block";
+    containerVeiculo.style.display = "flex";
     selectVeiculo.disabled = false;
     carregarVeiculos(clienteId);
   });

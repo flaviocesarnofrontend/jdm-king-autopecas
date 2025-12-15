@@ -6,6 +6,14 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+    
+    <!-- PNGs modernos -->
+    <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+
+    <!-- Android / PWA -->
+    <link rel="manifest" href="../site.webmanifest">
+
     <link rel="stylesheet" href="../assets/css/global.css">
     <link rel="stylesheet" href="../assets/css/servicos.css">
     <title>Serviços</title>
@@ -21,7 +29,7 @@
                 <img class="icon-qyshansd" src="../assets/img/global/icons/clientes-icon.svg" alt="Clientes" class="nav-icon">
                 <span>Clientes</span>
             </a>
-            <a href="#" class="nav-link-aqweasdjh">
+            <a href="#" class="nav-link-aqweasdjh active">
                 <img class="icon-qyshansd" src="../assets/img/global/icons/servicos-icon.svg" alt="Serviços" class="nav-icon">
                 <span>Serviços</span>
             </a>
@@ -63,10 +71,7 @@
         <!-- modal -->
          <div class="modal-overlay" id="modalOverlay" onclick="closeModal()">
             <div class="modal" onclick="event.stopPropagation()">
-                <div class="fecha-modal" onclick="closeModal()">
-                    <img src="../assets/img/servicos/cancel-icon.svg" alt="">
-                </div>
-                <h2 class="modal-titulo">Nova Ordem de Serviço</h2>
+                <h2 class="modal-titulo">Nova ordem de serviço</h2>
                 <p class="modal-sub-titulo">Registre um novo serviço no sistema</p>
                 <div class="modal-container-form">
                     <div class="modal-novo-servico-container">
@@ -100,11 +105,11 @@
                     </div>
                     <div class="modal-novo-servico-container">
                         <label class="novo-servico-label" for="novo-servico-descricao-pedido">Descrição do Pedido</label>
-                        <textarea class="novo-servico-descricao-pedido" name="novo-servico-descricao-pedido" id="novo-servico-descricao-pedido" rows="5" placeholder="O que o cliente relatou..."></textarea>
+                        <textarea class="novo-servico-descricao-pedido" name="novo-servico-descricao-pedido" id="novo-servico-descricao-pedido" rows="3" placeholder="O que o cliente relatou..."></textarea>
                     </div>
                     <div class="modal-novo-servico-container">
                         <label class="novo-servico-label" for="novo-servico-descricao-execucao">Descrição da Execução</label>
-                        <textarea class="novo-servico-descricao-execucao" name="novo-servico-descricao-execucao" id="novo-servico-descricao-execucao" rows="5" placeholder="O que o mecânico relatou..."></textarea>
+                        <textarea class="novo-servico-descricao-execucao" name="novo-servico-descricao-execucao" id="novo-servico-descricao-execucao" rows="3" placeholder="O que o mecânico relatou..."></textarea>
                     </div>
                     <div class="modal-novo-servico-container">
                         <label class="novo-servico-label" for="novo-servico-pecas-utilizadas-select">Peças Utilizadas</label>
@@ -136,6 +141,7 @@
                     </div>
                     <!-- <button onclick="salvarCliente()">Salvar</button> -->
                     <div class="close-btn-container">
+                        <button class="cancel-btn" onclick="closeModal()">Cancelar</button>
                         <button class="close-btn" onclick="salvarServico()">Criar ordem de serviço</button>
                         <!-- <button class="close-btn" onclick="closeModal()">Criar ordem de serviço</button> -->
                     </div>

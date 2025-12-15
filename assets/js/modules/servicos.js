@@ -24,7 +24,7 @@ export function salvarServico() {
     id: Date.now(),
     clienteId: Number(clienteId),
     veiculoId: Number(veiculoId),
-    tipoServico: tipoServicoTexto, 
+    tipoServico: tipoServicoTexto,
     pedido: descricaoPedido,
     execucao: descricaoExecucao,
     status: "andamento",

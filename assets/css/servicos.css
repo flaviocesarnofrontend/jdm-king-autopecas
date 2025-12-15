@@ -51,11 +51,15 @@
     cursor: pointer;
 }
 
+.btn-novo-servico:hover {
+    background-color: #187026;
+}
+
 #busca {
     background-color: transparent;
     border: 1px solid #666;
     font-weight: 900;
-    padding: 22px 12px 22px 34px;
+    padding: 22px 12px 22px 42px;
     line-height: 1.20;
     width: 100%;
     color: #FFF;
@@ -259,16 +263,27 @@
 }
 
 .novo-servico-select {
-    font-size: 0.825rem;
-    font-weight: 900;
-    padding: 8px 6px;
+    font-family: 'inter', sans-serif;
+    font-size: 1rem;
+    padding: 14px;
     border-radius: var(--border-radius);
     border: 2px solid #666666;
-    background-color: transparent;   /* deixa fundo transparente */
-    color: #818181;
+    background-color: #FFF;
+    color: #000;
     cursor: pointer;
     padding-right: 40px;
 }
+
+/*
+width: 100%;
+  padding: 14px;
+  border-radius: var(--border-radius);
+  border: 2px solid #818181;
+  font-size: 1rem;
+  background-color: #fff;
+  outline: none;
+  font-family: "Inter", sans-serif;
+*/
 
 /* Setinha do dropdown personalizada */
 .dropdown-select-arrow {
@@ -311,6 +326,14 @@
 
 /* Janela Modal */
 
+body.modal-open {
+    overflow: hidden;
+}
+
+body.modal-close {
+    overflow: none;
+}
+
 .modal-overlay {
   display: none; /* janela modal oculta por padrão */
   position: fixed;
@@ -321,17 +344,20 @@
   background-color: rgba(0, 0, 0, 0.6);
   align-items: center;
   justify-content: center;
+  overflow-y: auto;
+  padding-inline: 12px;
+  padding-block: 12px;
 }
 
 .modal {
     position: relative;
     box-sizing: border-box;
-    background-color: #D9D9D9;
+    background-color: #E5E5E5;
     padding: 16px;
     border-radius: var(--border-radius);
     width: 100%;
     max-width: 682px;
-    margin-inline: 12px;
+    margin: auto;
 }
 
 .fecha-modal {
@@ -381,14 +407,18 @@
 .novo-servico-descricao-execucao {
     font-family: "inter", sans-serif;
     width: 100%;
-    padding: 12px;
+    padding: 14px;
     border-radius: var(--border-radius);
     border: 2px solid #666666;
-    background-color: transparent;   /* deixa fundo transparente */
-    color: #818181;
-    font-size: 0.825rem;
-    font-weight: 700;
+    background-color: #FFF;
+    color: #000;
+    font-size: 1rem;
     resize: vertical;
+}
+
+.novo-servico-descricao-pedido::placeholder,
+.novo-servico-descricao-execucao::placeholder {
+    color: #9d9c9c;
 }
 
 .novo-servico-pecas-utilizadas-small-label {
@@ -419,11 +449,10 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    font-weight: 700;
-    font-size: 0.825rem;
+    font-size: 1rem;
     color: #000;
     background-color: rgba(129, 129, 129, 0.5);
-    padding: 8px 7px;
+    padding: 14px;
     border-radius: var(--border-radius);
 }
 
@@ -432,21 +461,41 @@
     font-weight: 900;
 }
 
+.cancel-btn {
+    padding: 12px 18px;
+    font-size: 0.825rem;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    border: none;
+    font-family: "Inter", sans-serif;
+    background-color: #D1D1D1;
+}
+
+.cancel-btn:hover {
+    background-color: #BDBDBD;
+}
+
 .close-btn-container {
     display: flex;
     justify-content: flex-end;
+    gap: 14px;
+    margin-top: 36px;
 }
 
 .close-btn {
-    margin-top: 36px;
-    padding: 12px 16px;
+    padding: 12px 18px;
     border: none;
     border-radius: var(--border-radius);
     cursor: pointer;
     background-color: #337D1C;
     color: #FFF;
-    font-weight: 900;
+    font-weight: 600;
     font-size: 0.825rem;
+    font-family: 'inter', sans-serif;
+}
+
+.close-btn:hover {
+    background-color: #187026;
 }
 
 @media screen and (min-width: 50rem) /* 800px */ {
@@ -484,8 +533,26 @@
         font-weight: 900;
     }
 
+    .modal-overlay {
+        padding-inline: 30px;
+        padding-block: 30px;
+    }
+
     .modal {
-        margin-inline: 60px;
+        padding: 36px;
+    }
+
+    .novo-servico-select {
+        font-size: 1rem;
+        padding: 14px;
+        border-radius: var(--border-radius);
+        border: 2px solid #818181;
+        background-color: #FFF;   /* deixa fundo transparente */
+        color: #000;
+        cursor: pointer;
+        padding-right: 40px;
+        outline: none;
+        font-family: "Inter", sans-serif;
     }
 
     .cartoes {

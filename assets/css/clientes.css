@@ -42,6 +42,10 @@
     cursor: pointer;
 }
 
+.btn-novo-cliente:hover {
+    background-color: #187026;
+}
+
 #busca {
     background-color: transparent;
     border: 1px solid #666;
@@ -154,6 +158,7 @@
 
 .container-veiculos {
     display: flex;
+    flex-flow: wrap;
     gap: 10px;
 }
 
@@ -182,7 +187,7 @@ modal
     border: none;
     border-radius: 10px;
     padding: 36px;
-    background-color: #D9D9D9;
+    background-color: #E5E5E5;
 }
 
 #myModal::backdrop {
@@ -224,20 +229,18 @@ modal
 .modal-input {
     font-family: 'inter', sans-serif;
     width: 100%;
-    padding: 13px 12px;
+    padding: 14px;
     border-radius: var(--border-radius);
     border: 2px solid #666;
     outline: none;
     font-size: 1rem;
-    font-weight: 900;
     color: #000;
-    background-color: transparent;
+    background-color: #FFF;
     resize: vertical;
 }
 
 .modal-input::placeholder {
-    color: #818181; /* fonte do placeholder */
-    font-weight: 900;
+    color: #9d9c9c;
 }
 
 .linha-veiculos {
@@ -259,6 +262,11 @@ modal
     border-radius: var(--border-radius);
     border: 0;
     cursor: pointer;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+#btnAddVeiculo:hover {
+    background-color: rgba(129, 129, 129, 0.8);
 }
 
 #listaVeiculos {
@@ -281,12 +289,27 @@ modal
 }
 
 .btn-salvar-container {
-  display: flex;
-  justify-content: flex-end;
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 36px;
+    gap: 14px;
+}
+
+#closeButton {
+    padding: 12px 18px;
+    font-size: 0.825rem;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    border: none;
+    font-family: "Inter", sans-serif;
+    background-color: #D1D1D1;
+}
+
+#closeButton:hover {
+    background-color: #BDBDBD;
 }
 
 #cadastrar {
-  margin-top: 36px;
   padding: 12px 16px;
   border: none;
   border-radius: var(--border-radius);
@@ -297,14 +320,8 @@ modal
   cursor: pointer;
 }
 
-#closeButton {
-  position: absolute;
-  top: 15px;
-  right: 15px;
-  cursor: pointer;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+#cadastrar:hover {
+    background-color: #187026;
 }
 
 /* 

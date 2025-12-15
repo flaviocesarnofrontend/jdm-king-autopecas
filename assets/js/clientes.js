@@ -1,3 +1,28 @@
+//mascara para telefone para ser adicionado ao cartão JÁ SALVO
+function mascaraTelefone(tel) {
+  if (!tel) return "";
+
+  const numeros = tel.toString().replace(/\D/g, "");
+
+  // Celular com DDD (11 dígitos)
+  if (numeros.length === 11) {
+    return numeros.replace(
+      /(\d{2})(\d{5})(\d{4})/,
+      "($1) $2-$3"
+    );
+  }
+
+  // Fixo com DDD (10 dígitos)
+  if (numeros.length === 10) {
+    return numeros.replace(
+      /(\d{2})(\d{4})(\d{4})/,
+      "($1) $2-$3"
+    );
+  }
+
+  return tel;
+}
+
 let clientes = JSON.parse(localStorage.getItem("clientes")) || [];
 const listaVeiculos = document.getElementById("listaVeiculos");
 const btnAdd = document.getElementById("btnAddVeiculo");
@@ -14,7 +39,12 @@ btnAdd?.addEventListener("click", () => {
         return;
     }
 
-    veiculosTemp.push({ modelo, placa });
+    // veiculosTemp.push({ modelo, placa });
+    veiculosTemp.push({
+        id: Date.now(),
+        modelo,
+        placa
+    });
 
     const item = document.createElement("div");
     item.classList.add("badge-veiculo");
@@ -89,6 +119,7 @@ function exibirDados(dados) {
 
     const container = document.querySelector(".cartoes");
     container.innerHTML = "";
+    dados.sort((a, b) => b.id - a.id);
 
     dados.forEach(cliente => {
         const card = document.createElement("div");
@@ -101,7 +132,7 @@ function exibirDados(dados) {
                 <p class="cartao-cpf">CPF:${cliente.cpf}</p>
                 <p class="cartao-tel">
                     <img src="../assets/img/clientes/telefone-icon.svg" alt="">
-                    ${cliente.telefone}
+                    ${mascaraTelefone(cliente.telefone)}
                 </p>
                 <p class="cartao-email">
                     <img src="../assets/img/clientes/mail-icon.svg" alt="">
@@ -211,7 +242,8 @@ function adicionarEventoEdicao(){
             veiculosTemp.forEach(v => {
                 const item = document.createElement("div");
                 item.classList.add("badge-veiculo");
-                item.innerText = `${v.veiculos} - ${v.placa}`;
+                // item.innerText = `${v.veiculos} - ${v.placa}`;
+                item.innerText = `${v.modelo} - ${v.placa}`;
                 listaVeiculos.appendChild(item);
             });
             modal.showModal();
@@ -242,7 +274,3 @@ modal.addEventListener('click', (event) => {
     modal.close();
   }
 });
-
-
-
-

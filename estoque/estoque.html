@@ -6,6 +6,9 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
     <link rel="stylesheet" href="../assets/css/global.css">
     <link rel="stylesheet" href="../assets/css/estoque.css">
     <title>Estoque</title>
@@ -26,17 +29,61 @@
                 <img class="oiwujmnh icon-qyshansd" src="../assets/img/global/icons/vendas-icon.svg" alt="Vendas" class="nav-icon">
                 <span>Vendas</span>
             </a>
-            <a href="#" class="nav-link-aqweasdjh">
+            <a href="#" class="nav-link-aqweasdjh active">
                 <img class="oiwujmnh icon-qyshansd" src="../assets/img/global/icons/estoque-icon.svg" alt="Estoque" class="nav-icon">
                 <span>Estoque</span>
             </a>
         </nav>
     </header>
     <main class="con1238">
-        <!-- o seu conteúdo vai aqui -->
-         <h1>Estoque</h1>
+        <div class="container-titulo-btn-novo-estoque">
+            <div class="container-titulo">
+                <h1 class="titulo">Estoque</h1>
+                <p class="sub-titulo">Gerencie o inventário de peças e componentes</p>
+            </div>
+            <div class="container-btn">
+                <button class="btn-novo-estoque" onclick="openModal()">
+                    <img src="../assets/img/estoque/adicionar-icon.svg" alt="">
+                    Nova peça
+                </button>
+            </div>
+        </div>
+        <div class="container-dashboard-status-estoque">
+            <div class="status-estoque-atencao-container">
+                <h2 class="status-estoque-titulo">Itens em Atenção</h2>
+                <div class="status-estoque-atencao-dashboard">
+                    <img src="../assets/img/estoque/atencao-icon.svg" alt="">
+                    <span id="estoque-atencao-estatistica">3</span>
+                </div>
+            </div>
+            <div class="status-estoque-criticos-container">
+                <h2 class="status-estoque-titulo">Itens críticos</h2>
+                <div class="status-estoque-criticos-dashboard">
+                    <img src="../assets/img/estoque/caixa-vermelha-crítico.svg" alt="">
+                    <span id="estoque-criticos-estatistica">0</span>
+                </div>
+            </div>
+            <div class="status-estoque-pizza-container">
+                <h2 class="status-estoque-titulo">Status do estoque</h2>
+                <div class="status-estoque-pizza-dashboard">
+                    <div class="status-pizza-google-chart">
+                        <div id="grafico"></div>
+                    </div>
+                    <div class="status-estoque-legendas-container">
+                        <div class="status-pizza-legenda-cor">
+                            <div class="legenda-cor-verde"></div>
+                            <div class="legenda-cor-amarela"></div>
+                        </div>
+                        <div class="status-pizza-legenda">
+                            <span class="legenda-texto-amarelo">Atenção</span>
+                            <span class="legenda-texto-verde">Normal</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <input type="search" name="busca" id="busca" placeholder="Busque pelo nome da peça">
     </main>
-    <script src="../assets/js/global.js"></script>
     <script src="../assets/js/estoque.js"></script>
 </body>
 </html>

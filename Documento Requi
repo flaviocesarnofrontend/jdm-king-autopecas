@@ -1,92 +1,52 @@
-1 Objetivo do Documento
+📄 Documento de Especificação de Requisitos
+
+Sistema JDM King Autopeças
+
+1. Informações do Projeto
+
+Curso: Desenvolvedor Front-End – 2025
+Professor: Paulo Lemos
+Finalidade: Trabalho acadêmico com apresentação
+
+2. Objetivo do Documento
 
 Este documento tem como objetivo especificar os requisitos do Sistema JDM King Autopeças, um sistema web e mobile desenvolvido para auxiliar os funcionários da loja no controle de clientes, ordens de serviço, estoque de peças e faturamento, servindo como base para o desenvolvimento e apresentação acadêmica.
 
-	Curso: Desenvolvedor Front-End – 2025
-	Professor: Paulo Lemos
-	Finalidade: Trabalho acadêmico com apresentação
-
-
-2 Escopo do Projeto
+3. Escopo e Visão Geral
 
 O projeto consiste no desenvolvimento de um sistema de gestão para loja de autopeças, acessível via web e dispositivos móveis, destinado exclusivamente aos funcionários da empresa, permitindo controle operacional e financeiro de forma integrada.
 
-3 Visão Geral do Sistema
- Descrição do Sistema
-O Sistema JDM King Autopeças permitirá que os funcionários realizem:
-	Cadastro e consulta de clientes
-	Abertura e acompanhamento de ordens de serviço
-	Controle de estoque de peças
-	Registro e controle de faturamento
+Usuários: Funcionários da loja (todos possuem permissão total de acesso às funcionalidades).
 
-Todos os usuários terão acesso completo às funcionalidades do sistema.
+4. Requisitos Funcionais (RF)
+	•	RF01 (Autenticação): Login e logout de usuários.
+	•	RF02 (Gestão de Clientes): Cadastro, edição e consulta de clientes.
+	•	RF03 (Ordens de Serviço): Criação e consulta de OS vinculadas a clientes.
+	•	RF04 (Itens da OS): Inclusão de peças e serviços executados.
+	•	RF05 (Status): Controle de status da OS (Aberta, Em andamento, Finalizada).
+	•	RF06 (Estoque): Cadastro e atualização de peças.
+	•	RF07 (Baixa Automática): Atualização automática do estoque ao usar peças na OS.
 
-3 Usuários do Sistema
-	Funcionários da loja
-(Todos possuem permissão total de acesso às funcionalidades)
+5. Requisitos Não Funcionais (RNF)
+	•	Acesso via navegador web.
+	•	Versão mobile responsiva.
+	•	Interface simples e intuitiva.
+	•	Armazenamento seguro dos dados.
 
-4 Requisitos Funcionais (RF)
+6. Regras de Negócio (RN)
+	•	RN01: OS somente com cliente cadastrado.
+	•	RN02: Faturamento apenas após finalização da OS.
+	•	RN03: Valor final considerando peças e serviços.
 
- Autenticação
+7. Requisitos de Interface
 
-RF01 O sistema deve permitir login de funcionarios.
-RF02 O sistema deve permitir logout do usuario.
-  Cadastro do Clientes
-Cadastro de clientes
-RF03 o Sitema deve permitir cadastrar clientes.
-RF04 O sistema deve permitir editar dados dos clientes.
-RF05 O sistema deve permitir consultar clientes cadastratos.
+Layout moderno, organizado e responsivo, com menu principal de fácil acesso aos módulos.
 
-Dados do Cliente:
-	Nome
-	CPF ou CNPJ
-	Telefone
-	E-mail
-	Endereço
-Ordens de serviços (os)
-RF06 O sistema deve permitir criar ordens de serviço.
-RF07 A ordem de serviço deve estar vinculada a um cliente.
-RF08 A OS deve permitir adicioanr peças ultilizadas.
-RF09 A OS deve permitir resgistrar serviços executados.
-RF10 A OS deve possuir status (Aberta, Em andamento, Finalizada).
-RF11 O sistema deve permitir consultar ordens de servoiços.
+8. Critérios de Aceitação
+	•	Sistema funcionando em web e mobile.
+	•	Cálculos corretos de faturamento.
+	•	Baixa automática de estoque funcionando corretamente.
 
-Estoque de Peças
-RF12 O sistema deve permitir cadastrar peças no stoque.
-RF13 O sistema deve permitir atualizar quantidade de peças.
-RF14 O sistema deve baixar automaticamente o estoque ao ultizar peças no OS.
+9. Considerações Finais
 
-Dados da peças.
-CODIGO
-NOME
-CATEGORIA
-QUANTIDADE DISPONIVEL
-VALOR UNITARIO 
-
-5 Requisitos nao funcioanis (RNF)
-RNF1 O sistema deve ser acessivel via navegador web.
-RNF2 O sistema deve possior verção mobile resposiva.
-RNF3 O sistema deve apresentar interfacesimples e intuitiva.
-RNF4 O sistema deve garantir armazenamento seguro dos daos.
-
-6 Regas de Negocio RN
-RN1 Uma ordem de serviço só pode ser criada com cliente cadastrado.
-RN2 O Faturamento só pode ser realizado após a finalização da OS.
-RN3 O valor final da OS deve considerar peças e serviços.
-
-7    Requisitos de Interface
-	Layout moderno e organizado
-	Menu principal com acesso aos módulos
-	Interface adaptável para web e mobile
-	Padronização visual em todas as telas
-8   Critérios de Aceitação
-	Sistema funcionando em ambiente web e mobile
-	Cadastro de clientes operante
-	Ordens de serviço com cálculo correto
-	Estoque atualizado automaticamente
-	Faturamento registrado corretamente
-9 Considerações Finais
-
-O Sistema JDM King Autopeças visa otimizar os processos internos da loja, proporcionando maior organização, agilidade e controle das informações, sendo um projeto adequado para aplicação prática dos conhecimentos adquiridos no curso de Desenvolvedor Front-End.
-
-
+O Sistema JDM King Autopeças visa otimizar os processos internos da loja, proporcionando maior organização, agilidade e controle das informações, sendo um projeto adequado para aplicação prática dos conhecimentos adquiridos no curso de Desenvolvedor Front-End

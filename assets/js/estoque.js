@@ -50,6 +50,7 @@ function closeModal() {
   modal.style.display = "none";
 }
 // FIM Modal ====================================
+
 // pesquisa
 
 /**
@@ -60,29 +61,30 @@ function closeModal() {
 
 const inputBusca = document.getElementById("busca");
 
-function normalizarTexto(texto) {
+function normalizar(texto) {
   return texto
+    .toLowerCase()
     .normalize("NFD")
     .replace(/[\u0300-\u036f]/g, "")
-    .toLowerCase()
     .trim();
 }
 
 inputBusca.addEventListener("input", () => {
-  const termo = normalizarTexto(inputBusca.value);
+  const termo = normalizar(inputBusca.value);
+
   const cartoes = document.querySelectorAll(".cartao");
 
   cartoes.forEach(cartao => {
-    const titulo = normalizarTexto(
+    const nome = normalizar(
       cartao.querySelector(".cartao-titulo").textContent
     );
 
-    const codigo = normalizarTexto(
+    const codigo = normalizar(
       cartao.querySelector(".cartao-codigo-peca").textContent
     );
 
     const encontrado =
-      titulo.includes(termo) || codigo.includes(termo);
+      nome.includes(termo) || codigo.includes(termo);
 
     cartao.style.display = encontrado ? "block" : "none";
   });

@@ -179,8 +179,34 @@
             </div>
         </div>
         <div id="modal-nova-peca" class="modal-nova-peca" onclick="closeModal()">
-            <div class="modal">
-
+            <!-- event.stopPropagation é responsável por permitir o click no cartão do modal -->
+            <div class="modal" onclick="event.stopPropagation()">
+                <h4 class="modal-titulo">Cadastrar nova peça</h4>
+                <p class="modal-sub-titulo">Adicione uma nova peça ao estoque</p>
+                <div class="modal-container-form">
+                    <div class="modal-novo-estoque-container">
+                        <label class="modal-novo-estoque-label" for="nome-peca-nova">Nome da peça</label>
+                        <input class="modal-novo-estoque-input-text" type="text" name="nome-peca-nova" id="nome-peca-nova" placeholder="Digite o nome da peça" required>
+                    </div>
+                    <div class="modal-qtd-peca-nova-qtc-minima-container">
+                        <div class="modal-novo-estoque-container max-width">
+                            <label class="modal-novo-estoque-label" for="qtd-peca-nova">Quantidade</label>
+                            <input class="modal-novo-estoque-input-number" type="number" name="qtd-peca-nova" id="qtd-peca-nova" placeholder="0" required>
+                        </div>
+                        <div class="modal-novo-estoque-container max-width">
+                            <label class="modal-novo-estoque-label" for="modal-qtd-minima-peca-nova">Estoque mínimo</label>
+                            <input class="modal-novo-estoque-input-number" type="number" name="modal-qtd-minima-peca-nova" id="modal-qtd-minima-peca-nova" placeholder="0">
+                        </div>
+                    </div>
+                    <div class="modal-novo-estoque-container max-width">
+                        <label class="modal-novo-estoque-label" for="modal-valor-unitario">Valor Unitário (R$):</label>
+                        <input class="modal-novo-estoque-input-text" type="text" name="modal-valor-unitario" id="modal-valor-unitario" placeholder="R$ 0,00">
+                    </div>
+                </div>
+                <div class="modal-botoes-container">
+                    <button class="modal-botao-cancelar" onclick="closeModal()">Cancelar</button>
+                    <button class="modal-botao-salvar" onclick="salvarServico()">Cadastrar peça</button>
+                </div>
             </div>
         </div>
     </main>

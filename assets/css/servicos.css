@@ -413,7 +413,7 @@ body.modal-close {
     background-color: #FFF;
     color: #000;
     font-size: 1rem;
-    resize: vertical;
+    resize: vertical; /* permite redimensionar verticalmente o text-area */
 }
 
 .novo-servico-descricao-pedido::placeholder,

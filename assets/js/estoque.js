@@ -34,7 +34,7 @@ google.charts.load('current', {'packages':['corechart']});
 }
 
 // Google chart FIM =============================
-
+// Modal ============================
 function openModal() {
   document.body.classList.remove("modal-close");
   document.body.classList.add("modal-open");
@@ -49,7 +49,7 @@ function closeModal() {
   if (!modal) return;
   modal.style.display = "none";
 }
-
+// FIM Modal ====================================
 // pesquisa
 
 /**
@@ -89,3 +89,47 @@ inputBusca.addEventListener("input", () => {
 });
 
 // fim pesquisa
+
+// Validador campo de dinheiro ========================
+
+const inputValor = document.getElementById("modal-valor-unitario");
+
+function formatarValor(valorNumerico) {
+  let valor = (valorNumerico / 100).toFixed(2);
+  valor = valor.replace(".", ",");
+  valor = valor.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+  return "R$ " + valor;
+}
+
+function moverCursorParaFinal() {
+  requestAnimationFrame(() => {
+    const len = inputValor.value.length;
+    inputValor.setSelectionRange(len, len);
+  });
+}
+
+inputValor.addEventListener("input", () => {
+  let numeros = inputValor.value.replace(/\D/g, "");
+
+  if (!numeros) {
+    inputValor.value = "";
+    return;
+  }
+
+  inputValor.value = formatarValor(parseInt(numeros, 10));
+  moverCursorParaFinal();
+});
+
+/* 🔒 Impede o cursor de ficar antes do R$ */
+inputValor.addEventListener("click", moverCursorParaFinal);
+inputValor.addEventListener("keydown", moverCursorParaFinal);
+inputValor.addEventListener("focus", moverCursorParaFinal);
+
+/* 🔁 Se sair com R$ 0,00 → volta ao placeholder */
+inputValor.addEventListener("blur", () => {
+  if (inputValor.value === "R$ 0,00") {
+    inputValor.value = "";
+  }
+});
+
+// FIM Validador campo de dinheiro ======================

@@ -190,6 +190,88 @@
     appearance: none;
 }
 
+.cartoes {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
+    gap: 24px;
+}
+
+.cartao {
+    background-color: #FFF;
+    color: #000;
+    border-radius: var(--border-radius);
+    padding: 20px;
+}
+
+.cartao-header {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+}
+
+.cartao-main {
+    display: flex;
+    gap: 65px;
+    border-bottom: 2px solid #000;
+    padding-block-end: 33px;
+    margin-block-end: 10px;
+}
+
+.cartao-titulo {
+    flex: 1;
+    font-size: 1rem;
+    font-weight: 900;
+    margin-block-end: 23px;
+}
+
+.cartao-status-peca-normal {
+    font-weight: 700;
+    color: #337D1C;
+    background-color: rgba(51, 125, 28, 0.2);
+    padding: 10px;
+    border-radius: var(--border-radius);
+    font-size: 0.825rem;
+}
+
+.cartao-status-peca-atencao {
+    font-weight: 700;
+    color: #F9B11F;
+    background-color: rgba(249, 176, 31, 0.2);
+    padding: 10px;
+    border-radius: var(--border-radius);
+    font-size: 0.825rem;
+}
+
+.cartao-status-peca-critico {
+    font-weight: 700;
+    color: #E01313;
+    background-color: rgba(224, 19, 19, 0.2);
+    padding: 10px;
+    border-radius: var(--border-radius);
+    font-size: 0.825rem;
+}
+
+.cartao-botoes {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.cartao-dados {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.cartao-dado-label {
+    font-size: 0.75rem;
+}
+
+.cartao-dado {
+    font-size: 1.125rem;
+    font-weight: 900;
+}
+
 @media screen and (min-width: 50rem) /* 800px */ {
     .container-titulo {
         gap: 12px;

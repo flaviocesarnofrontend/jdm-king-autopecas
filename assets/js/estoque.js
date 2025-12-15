@@ -1,137 +1,207 @@
-// Google chart =============================
+// ===============================
+// CONFIG LOCAL STORAGE
+// ===============================
+const STORAGE_KEY = "storage-estoque";
 
-google.charts.load('current', {'packages':['corechart']});
-    google.charts.setOnLoadCallback(drawChart);
+// ===============================
+// UTILIDADES
+// ===============================
+function getEstoque() {
+    return JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+}
 
-    function drawChart() {
+function setEstoque(dados) {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(dados));
+}
 
-    var data = google.visualization.arrayToDataTable([
-        ['status', 'statistic'],
-        ['Normal',82],
-        ['Crítico',18],
-    ]);
+function gerarCodigo() {
+    return "#" + Date.now();
+}
 
-    const options = {
-        width: 61,
-        height: 61,
-        legend: "none",     // remove legenda
-        pieSliceText: "none", // remove textos
-        chartArea: {
-        width: "100%",
-        height: "100%"
-        },
-        enableInteractivity: false, // remove interatividades
-        tooltip: { trigger: "none" }, // remove outras legendas
-        pieHole: 0,       // cria um buraco no centro
-        pieStartAngle: 180, // rotação
-        backgroundColor: "transparent", //bg atrás do gráfico
-        colors: ['#007D00', '#F9B11F'],
+function formatarMoeda(valor) {
+    return valor.toLocaleString("pt-BR", {
+        style: "currency",
+        currency: "BRL"
+    });
+}
+
+function definirStatus(qtd, minimo) {
+    if (qtd <= 0 || qtd < minimo) {
+        return { texto: "Crítico", classe: "cartao-status-peca-critico" };
+    }
+    if (qtd === minimo) {
+        return { texto: "Atenção", classe: "cartao-status-peca-atencao" };
+    }
+    return { texto: "Normal", classe: "cartao-status-peca-normal" };
+}
+
+// ===============================
+// RENDERIZAÇÃO
+// ===============================
+function renderizarEstoque() {
+    const container = document.querySelector(".cartoes");
+    container.innerHTML = "";
+
+    const estoque = getEstoque();
+
+    estoque.forEach(peca => {
+        const status = definirStatus(peca.quantidade, peca.minimo);
+        const valorTotal = peca.quantidade * peca.valorUnitario;
+
+        const card = document.createElement("div");
+        card.classList.add("cartao");
+
+        card.innerHTML = `
+            <div class="cartao-header">
+                <h3 class="cartao-titulo">${peca.nome}</h3>
+                <span class="cartao-codigo-peca">${peca.codigo}</span>
+                <span class="${status.classe}">${status.texto}</span>
+                <div class="cartao-botoes">
+                    <a href="#"><img src="../assets/img/estoque/edit-icon.svg" alt=""></a>
+                    <a href="#"><img src="../assets/img/estoque/delete-icon.svg" alt=""></a>
+                </div>
+            </div>
+
+            <div class="cartao-main">
+                <div class="cartao-dados">
+                    <span class="cartao-dado-label">Quantidade</span>
+                    <span class="cartao-dado">${peca.quantidade}</span>
+                </div>
+                <div class="cartao-dados">
+                    <span class="cartao-dado-label">Mínimo</span>
+                    <span class="cartao-dado">${peca.minimo}</span>
+                </div>
+                <div class="cartao-dados">
+                    <span class="cartao-dado-label">Valor Unit.</span>
+                    <span class="cartao-dado">${formatarMoeda(peca.valorUnitario)}</span>
+                </div>
+            </div>
+
+            <div class="cartao-footer">
+                <div class="cartao-dados">
+                    <span class="cartao-dado-label">Valor Total</span>
+                    <span class="cartao-dado">${formatarMoeda(valorTotal)}</span>
+                </div>
+            </div>
+        `;
+
+        container.appendChild(card);
+    });
+
+    // Atualiza o dashboard com os novos dados
+    atualizarDashboard();
+}
+
+// ===============================
+// SALVAR NOVA PEÇA
+// ===============================
+function salvarServico() {
+    const nome = document.getElementById("nome-peca-nova").value.trim();
+    const quantidade = Number(document.getElementById("qtd-peca-nova").value);
+    const minimo = Number(document.getElementById("modal-qtd-minima-peca-nova").value);
+    const valorTexto = document.getElementById("modal-valor-unitario").value;
+
+    if (!nome || quantidade <= 0) {
+        alert("Preencha os campos obrigatórios corretamente.");
+        return;
+    }
+
+    const valorUnitario = Number(
+        valorTexto.replace(/[^\d]/g, "")
+    ) / 100;
+
+    const novaPeca = {
+        id: Date.now(),
+        nome,
+        quantidade,
+        minimo,
+        valorUnitario,
+        codigo: gerarCodigo()
     };
 
-    var chart = new google.visualization.PieChart(document.getElementById('grafico'));
+    const estoque = getEstoque();
+    estoque.unshift(novaPeca); // nova peça sempre primeiro
+    setEstoque(estoque);
 
-    chart.draw(data, options);
+    renderizarEstoque(); // Renderiza a nova peça no estoque
+    closeModal();
+
+    // Limpa o formulário
+    document.getElementById("nome-peca-nova").value = "";
+    document.getElementById("qtd-peca-nova").value = "";
+    document.getElementById("modal-qtd-minima-peca-nova").value = "";
+    document.getElementById("modal-valor-unitario").value = "";
 }
 
-// Google chart FIM =============================
-// Modal ============================
-function openModal() {
-  document.body.classList.remove("modal-close");
-  document.body.classList.add("modal-open");
-  const modal = document.getElementById("modal-nova-peca");
-  modal.style.display = "flex";
+// ===============================
+// ATUALIZAÇÃO DO DASHBOARD
+// ===============================
+function atualizarDashboard() {
+    const estoque = getEstoque();
+
+    let atencao = 0;
+    let criticos = 0;
+    let normal = 0;
+
+    estoque.forEach(item => {
+        if (item.quantidade < item.minimo) {
+            criticos++;
+        } else if (item.quantidade === item.minimo) {
+            atencao++;
+        } else {
+            normal++;
+        }
+    });
+
+    // Atualiza contadores
+    document.getElementById("estoque-atencao-estatistica").textContent = atencao;
+    document.getElementById("estoque-criticos-estatistica").textContent = criticos;
+
+    // Atualiza gráfico
+    atualizarGrafico(normal, atencao, criticos);
 }
 
-function closeModal() {
-  document.body.classList.remove("modal-open");
-  document.body.classList.add("modal-close");
-  const modal = document.getElementById("modal-nova-peca");
-  if (!modal) return;
-  modal.style.display = "none";
+// ===============================
+// ATUALIZAÇÃO DO GRÁFICO
+// ===============================
+function atualizarGrafico(normal, atencao, criticos) {
+    google.charts.load("current", { packages: ["corechart"] });
+    google.charts.setOnLoadCallback(() => {
+        const data = google.visualization.arrayToDataTable([
+            ["Status", "Quantidade"],
+            ["Normal", normal],
+            ["Atenção", atencao],
+            ["Crítico", criticos]
+        ]);
+
+        const options = {
+            legend: "none",
+            pieSliceText: "none",
+            backgroundColor: "transparent",
+            chartArea: {
+                width: "90%",
+                height: "90%"
+            },
+            slices: {
+                0: { color: "#007D00" }, // verde
+                1: { color: "#F9B11F" }, // amarelo
+                2: { color: "#e01313" }  // vermelho
+            },
+            tooltip: { trigger: "none" }
+        };
+
+        const chart = new google.visualization.PieChart(
+            document.getElementById("grafico")
+        );
+
+        chart.draw(data, options);
+    });
 }
-// FIM Modal ====================================
 
-// pesquisa
-
-/**
- * 
- * Essa pesquisa é a ideal pois ela normaliza palavras como Óleo, Oleo, óleo e oleo
- * 
- */
-
-const inputBusca = document.getElementById("busca");
-
-function normalizar(texto) {
-  return texto
-    .toLowerCase()
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "")
-    .trim();
-}
-
-inputBusca.addEventListener("input", () => {
-  const termo = normalizar(inputBusca.value);
-
-  const cartoes = document.querySelectorAll(".cartao");
-
-  cartoes.forEach(cartao => {
-    const nome = normalizar(
-      cartao.querySelector(".cartao-titulo").textContent
-    );
-
-    const codigo = normalizar(
-      cartao.querySelector(".cartao-codigo-peca").textContent
-    );
-
-    const encontrado =
-      nome.includes(termo) || codigo.includes(termo);
-
-    cartao.style.display = encontrado ? "block" : "none";
-  });
+// ===============================
+// INICIALIZAÇÃO
+// ===============================
+document.addEventListener("DOMContentLoaded", () => {
+    renderizarEstoque();
+    atualizarDashboard();
 });
-
-// fim pesquisa
-
-// Validador campo de dinheiro ========================
-
-const inputValor = document.getElementById("modal-valor-unitario");
-
-function formatarValor(valorNumerico) {
-  let valor = (valorNumerico / 100).toFixed(2);
-  valor = valor.replace(".", ",");
-  valor = valor.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-  return "R$ " + valor;
-}
-
-function moverCursorParaFinal() {
-  requestAnimationFrame(() => {
-    const len = inputValor.value.length;
-    inputValor.setSelectionRange(len, len);
-  });
-}
-
-inputValor.addEventListener("input", () => {
-  let numeros = inputValor.value.replace(/\D/g, "");
-
-  if (!numeros) {
-    inputValor.value = "";
-    return;
-  }
-
-  inputValor.value = formatarValor(parseInt(numeros, 10));
-  moverCursorParaFinal();
-});
-
-/* 🔒 Impede o cursor de ficar antes do R$ */
-inputValor.addEventListener("click", moverCursorParaFinal);
-inputValor.addEventListener("keydown", moverCursorParaFinal);
-inputValor.addEventListener("focus", moverCursorParaFinal);
-
-/* 🔁 Se sair com R$ 0,00 → volta ao placeholder */
-inputValor.addEventListener("blur", () => {
-  if (inputValor.value === "R$ 0,00") {
-    inputValor.value = "";
-  }
-});
-
-// FIM Validador campo de dinheiro ======================

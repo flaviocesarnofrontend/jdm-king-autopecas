@@ -292,7 +292,7 @@ body.modal-close {
 }
 
 .modal-nova-peca {
-  display: flex; /* janela modal oculta por padrão */
+  display: none; /* janela modal oculta por padrão */
   position: fixed;
   top: 0;
   left: 0;

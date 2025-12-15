@@ -33,3 +33,7 @@ As 4 perguntas mais importantes do projeto estão abaixo:
 ### O fluxograma abaixo é apenas um esboço (será finalizado até 15 de dezembro de 2025)
 
 ![Fluxograma do projeto](./assets/fluxograma/Fluxo%20de%20atendimento%20da%20autopeças.png)
+
+### O design do projeto construído no Figma
+
+Acesse o projeto no Figma [aqui](https://www.figma.com/design/qxlRNOYIJDp6bSfFyJUZSt/PI---Sistema-Automotivo---Sistema-de-servi%C3%A7os-e-pe%C3%A7as-de-carros?node-id=0-1&t=qqkW3JIuYR9Eoa6L-1).

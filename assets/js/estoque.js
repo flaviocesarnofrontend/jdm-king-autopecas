@@ -34,3 +34,58 @@ google.charts.load('current', {'packages':['corechart']});
 }
 
 // Google chart FIM =============================
+
+function openModal() {
+  document.body.classList.remove("modal-close");
+  document.body.classList.add("modal-open");
+  const modal = document.getElementById("modal-nova-peca");
+  modal.style.display = "flex";
+}
+
+function closeModal() {
+  document.body.classList.remove("modal-open");
+  document.body.classList.add("modal-close");
+  const modal = document.getElementById("modal-nova-peca");
+  if (!modal) return;
+  modal.style.display = "none";
+}
+
+// pesquisa
+
+/**
+ * 
+ * Essa pesquisa é a ideal pois ela normaliza palavras como Óleo, Oleo, óleo e oleo
+ * 
+ */
+
+const inputBusca = document.getElementById("busca");
+
+function normalizarTexto(texto) {
+  return texto
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase()
+    .trim();
+}
+
+inputBusca.addEventListener("input", () => {
+  const termo = normalizarTexto(inputBusca.value);
+  const cartoes = document.querySelectorAll(".cartao");
+
+  cartoes.forEach(cartao => {
+    const titulo = normalizarTexto(
+      cartao.querySelector(".cartao-titulo").textContent
+    );
+
+    const codigo = normalizarTexto(
+      cartao.querySelector(".cartao-codigo-peca").textContent
+    );
+
+    const encontrado =
+      titulo.includes(termo) || codigo.includes(termo);
+
+    cartao.style.display = encontrado ? "block" : "none";
+  });
+});
+
+// fim pesquisa

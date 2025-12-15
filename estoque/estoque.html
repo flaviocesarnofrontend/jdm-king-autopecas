@@ -82,12 +82,13 @@
                 </div>
             </div>
         </div>
-        <input type="search" name="busca" id="busca" placeholder="Busque pelo nome da peça">
+        <input type="search" name="busca" id="busca" placeholder="Busque pelo nome da peça ou código">
         <div class="cartoes">
             <div class="cartao">
                 <div class="cartao-header">
                     <h3 class="cartao-titulo">Filtro de ar do motor</h3>
-                    <div class="cartao-status-peca-atencao">Atenção</div>
+                    <span class="cartao-codigo-peca">#0182171238</span>
+                    <span class="cartao-status-peca-atencao">Atenção</span>
                     <div class="cartao-botoes">
                         <a href=""><img src="../assets/img/estoque/edit-icon.svg" alt=""></a>
                         <a href=""><img src="../assets/img/estoque/delete-icon.svg" alt=""></a>
@@ -117,7 +118,8 @@
             <div class="cartao">
                 <div class="cartao-header">
                     <h3 class="cartao-titulo">Óleo 5W30</h3>
-                    <div class="cartao-status-peca-normal">Normal</div>
+                    <span class="cartao-codigo-peca">#0182171239</span>
+                    <span class="cartao-status-peca-normal">Normal</span>
                     <div class="cartao-botoes">
                         <a href=""><img src="../assets/img/estoque/edit-icon.svg" alt=""></a>
                         <a href=""><img src="../assets/img/estoque/delete-icon.svg" alt=""></a>
@@ -146,8 +148,9 @@
             </div>
             <div class="cartao">
                 <div class="cartao-header">
-                    <h3 class="cartao-titulo">Óleo 5W30</h3>
-                    <div class="cartao-status-peca-critico">Crítico</div>
+                    <h3 class="cartao-titulo">Radiador</h3>
+                    <span class="cartao-codigo-peca">#0182171240</span>
+                    <span class="cartao-status-peca-critico">Crítico</span>
                     <div class="cartao-botoes">
                         <a href=""><img src="../assets/img/estoque/edit-icon.svg" alt=""></a>
                         <a href=""><img src="../assets/img/estoque/delete-icon.svg" alt=""></a>
@@ -173,6 +176,11 @@
                         <span class="cartao-dado" id="valor-total-peca">R$ 1680,00</span>
                     </div>
                 </div>
+            </div>
+        </div>
+        <div id="modal-nova-peca" class="modal-nova-peca" onclick="closeModal()">
+            <div class="modal">
+
             </div>
         </div>
     </main>

@@ -1,3 +1,106 @@
+//Validador de dinheiro
+
+const inputValor = document.getElementById("modal-valor-unitario");
+
+function formatarValor(valorNumerico) {
+  let valor = (valorNumerico / 100).toFixed(2);
+  valor = valor.replace(".", ",");
+  valor = valor.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+  return "R$ " + valor;
+}
+
+function moverCursorParaFinal() {
+  requestAnimationFrame(() => {
+    const len = inputValor.value.length;
+    inputValor.setSelectionRange(len, len);
+  });
+}
+
+inputValor.addEventListener("input", () => {
+  let numeros = inputValor.value.replace(/\D/g, "");
+
+  if (!numeros) {
+    inputValor.value = "";
+    return;
+  }
+
+  inputValor.value = formatarValor(parseInt(numeros, 10));
+  moverCursorParaFinal();
+});
+
+/* 🔒 Impede o cursor de ficar antes do R$ */
+inputValor.addEventListener("click", moverCursorParaFinal);
+inputValor.addEventListener("keydown", moverCursorParaFinal);
+inputValor.addEventListener("focus", moverCursorParaFinal);
+
+/* 🔁 Se sair com R$ 0,00 → volta ao placeholder */
+inputValor.addEventListener("blur", () => {
+  if (inputValor.value === "R$ 0,00") {
+    inputValor.value = "";
+  }
+});
+
+//FIM Validador de dinheiro
+
+//Modal
+
+function openModal() {
+  document.body.classList.remove("modal-close");
+  document.body.classList.add("modal-open");
+  const modal = document.getElementById("modal-nova-peca");
+  modal.style.display = "flex";
+}
+
+function closeModal() {
+  document.body.classList.remove("modal-open");
+  document.body.classList.add("modal-close");
+  const modal = document.getElementById("modal-nova-peca");
+  if (!modal) return;
+  modal.style.display = "none";
+}
+
+//FIM Modal
+
+// pesquisa
+
+/**
+ * 
+ * Essa pesquisa é a ideal pois ela normaliza palavras como Óleo, Oleo, óleo e oleo
+ * 
+ */
+
+const inputBusca = document.getElementById("busca");
+
+function normalizarTexto(texto) {
+  return texto
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase()
+    .trim();
+}
+
+inputBusca.addEventListener("input", () => {
+  const termo = normalizarTexto(inputBusca.value);
+  const cartoes = document.querySelectorAll(".cartao");
+
+  cartoes.forEach(cartao => {
+    const titulo = normalizarTexto(
+      cartao.querySelector(".cartao-titulo").textContent
+    );
+
+    const codigo = normalizarTexto(
+      cartao.querySelector(".cartao-codigo-peca").textContent
+    );
+
+    const encontrado =
+      titulo.includes(termo) || codigo.includes(termo);
+
+    cartao.style.display = encontrado ? "block" : "none";
+  });
+});
+
+// fim pesquisa
+
 // ===============================
 // CONFIG LOCAL STORAGE
 // ===============================

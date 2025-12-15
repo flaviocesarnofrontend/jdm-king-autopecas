@@ -141,7 +141,8 @@
 }
 
 .legenda-cor-verde,
-.legenda-cor-amarela {
+.legenda-cor-amarela,
+.legenda-cor-vermelha {
     width: 22px;
     height: 12px;
 }
@@ -152,6 +153,10 @@
 
 .legenda-cor-verde {
     background-color: #007D00;
+}
+
+.legenda-cor-vermelha {
+    background-color: #E01313;
 }
 
 #busca {

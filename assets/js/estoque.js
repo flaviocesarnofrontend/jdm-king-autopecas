@@ -175,19 +175,24 @@ function atualizarGrafico(normal, atencao, criticos) {
         ]);
 
         const options = {
+            width: 61,
+            height: 61,
             legend: "none",
             pieSliceText: "none",
             backgroundColor: "transparent",
+            enableInteractivity: false, // remove interatividades
+            tooltip: { trigger: "none" }, // remove outras legendas
+            pieHole: 0,       // cria um buraco no centro
+            pieStartAngle: 180, // rotação
             chartArea: {
-                width: "90%",
-                height: "90%"
+                width: "100%",
+                height: "100%"
             },
             slices: {
                 0: { color: "#007D00" }, // verde
                 1: { color: "#F9B11F" }, // amarelo
                 2: { color: "#e01313" }  // vermelho
             },
-            tooltip: { trigger: "none" }
         };
 
         const chart = new google.visualization.PieChart(

@@ -23,8 +23,28 @@ function mascaraTelefone(tel) {
   return tel;
 }
 
+//funcao para limpar formulário
+function resetarFormularioCliente() {
+  form.reset();
+  veiculosTemp = [];
+  clienteEditando = null;
+  listaVeiculos.innerHTML = "";
+  btnSalvar.textContent = "Cadastrar";
+}
+
 let clientes = JSON.parse(localStorage.getItem("clientes")) || [];
 const listaVeiculos = document.getElementById("listaVeiculos");
+
+listaVeiculos.addEventListener("click", (e) => {
+  const badge = e.target.closest(".badge-veiculo");
+  if (!badge) return;
+
+  const id = badge.dataset.id;
+
+  veiculosTemp = veiculosTemp.filter(v => v.id != id);
+  badge.remove();
+});
+
 const btnAdd = document.getElementById("btnAddVeiculo");
 
 let veiculosTemp = [];
@@ -39,16 +59,22 @@ btnAdd?.addEventListener("click", () => {
         return;
     }
 
-    // veiculosTemp.push({ modelo, placa });
-    veiculosTemp.push({
+    const veiculo = {
         id: Date.now(),
         modelo,
         placa
-    });
+    };
+
+    veiculosTemp.push(veiculo);
 
     const item = document.createElement("div");
     item.classList.add("badge-veiculo");
-    item.innerHTML = `${modelo} - ${placa}`;
+    item.dataset.id = veiculo.id;
+
+    item.innerHTML = `
+        <span>${veiculo.modelo} - ${veiculo.placa}</span>
+        <img src="../assets/img/clientes/cancel-icon.svg" alt="Remover veículo">
+    `;
 
     listaVeiculos.appendChild(item);
 
@@ -83,10 +109,6 @@ form?.addEventListener("submit", (e) => {
         clienteEditando = null;
         modal.close();
         exibirDados(clientes);
-
-        //localStorage.setItem("clientes", JSON.stringify(clientes)); 
-        
-        //return;
     }else{
         const dados = {
             id: clientes.length + 1,
@@ -112,6 +134,8 @@ form?.addEventListener("submit", (e) => {
         exibirDados(clientes);
     }
     window.location.href = "clientes.html";
+    resetarFormularioCliente();
+    modal.close();
 });
 
 function exibirDados(dados) {
@@ -193,7 +217,6 @@ function exibirDados(dados) {
     adicionarEventoEdicao();
 }
 
-
 function excluirDados(id){
     
     clientes = JSON.parse(localStorage.getItem("clientes")) || [];
@@ -219,7 +242,6 @@ inputBusca.addEventListener("input", () =>{
 
 exibirDados(clientes)
 
-
 function adicionarEventoEdicao(){
     const botoesEditar = document.querySelectorAll(".cartao-editar");
 
@@ -242,47 +264,48 @@ function adicionarEventoEdicao(){
             veiculosTemp.forEach(v => {
                 const item = document.createElement("div");
                 item.classList.add("badge-veiculo");
-                // item.innerText = `${v.veiculos} - ${v.placa}`;
-                item.innerText = `${v.modelo} - ${v.placa}`;
+                item.dataset.id = v.id;
+
+                item.innerHTML = `
+                    <span>${v.modelo} - ${v.placa}</span>
+                    <img src="../assets/img/clientes/cancel-icon.svg" alt="Remover veículo">
+                `;
+
                 listaVeiculos.appendChild(item);
             });
+            btnSalvar.textContent = "Salvar edição";
             modal.showModal();
         });
     });
 }
+
 const modal = document.getElementById("myModal");
-const openModalBtn = document.getElementById("novoCliente");
+const openModalBtn = document.getElementById("novoClienteModal");
 const closeModalBtn = document.getElementById("closeButton");
 const editOpenModalBtn = document.getElementsByClassName("cartao-editar")[0];
 
-
-document.getElementById("novoCliente").addEventListener("click", () => {
+//TODO: verificar a importância disso depois
+document.getElementById("novoClienteModal").addEventListener("click", () => {
     document.getElementById("formNovoCliente").reset();
     veiculosTemp = [];
 });
 
+openModalBtn.addEventListener("click", () => {
+  resetarFormularioCliente();
+  btnSalvar.textContent = "Cadastrar";
+  modal.showModal();
+});
 
-openModalBtn.addEventListener("click", () => modal.showModal());
-closeModalBtn.addEventListener("click", () => modal.close());
-// editOpenModalBtn.addEventListener("click", (event) => {
-//     modal.showModal()
-// console.log(event.target)
-// });
+closeModalBtn.addEventListener("click", () => {
+  resetarFormularioCliente();
+  modal.close();
+});
 
-modal.addEventListener('click', (event) => {
+modal.addEventListener("click", (event) => {
   if (event.target === modal) {
+    resetarFormularioCliente();
     modal.close();
   }
 });
 
-document.addEventListener("DOMContentLoaded", () => {
-  const inputCpf = document.querySelector('input[name="cpf"]');
-  const inputTelefone = document.querySelector('input[name="telefone"]');
-
-  function apenasNumeros(event) {
-    event.target.value = event.target.value.replace(/\D/g, "");
-  }
-
-  inputCpf.addEventListener("input", apenasNumeros);
-  inputTelefone.addEventListener("input", apenasNumeros);
-});
+const btnSalvar = document.getElementById("cadastrar");

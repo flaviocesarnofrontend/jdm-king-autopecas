@@ -255,7 +255,8 @@ modal
 }
 
 #btnAddVeiculo {
-    padding: 16px;
+    width: 52px;
+    height: 52px;
     background-color: rgba(129, 129, 129, 0.5);
     color: #FFF;
     font-weight: 900;

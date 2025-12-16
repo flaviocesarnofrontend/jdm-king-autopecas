@@ -39,7 +39,7 @@
                 <h1 class="titulo">Clientes</h1>
                 <p class="sub-titulo">Gerencie seus clientes e veículos cadastrados</p>
             </div>
-            <div id="novoCliente">
+            <div id="novoClienteModal">
                 <button id="btn-cadastro-novo-cliente" class="btn-novo-cliente">
                     <img src="../assets/img/clientes/adicionar-icon.svg" alt="">
                     Novo cliente
@@ -152,13 +152,18 @@
                         <label class="modal-label">Veículo(s)</label>
                     <div class="linha-veiculos">
                         <input class="modal-input" type="text" id="campoModelo" placeholder="Modelo">
-                            <input class="modal-input" type="text" id="campoPlaca" placeholder="Placa" maxlength="7">
-                            <button id="btnAddVeiculo" type="button" class="btn-add">
-                                <img src="../assets/img/clientes/adicionar-icon.svg" alt="Adicionar veículo">
-                            </button>
+                        <input class="modal-input" type="text" id="campoPlaca" placeholder="Placa" maxlength="7">
+                        <button id="btnAddVeiculo" type="button" class="btn-add">
+                            <img src="../assets/img/clientes/adicionar-icon.svg" alt="Adicionar veículo">
+                        </button>
                     </div>
         
-                    <div id="listaVeiculos" class="lista-veiculos"></div>
+                    <div id="listaVeiculos" class="lista-veiculos">
+                        <!-- <div class="badge-veiculo">
+                            modelo do veículo
+                            <img src="../assets/img/clientes/cancel-icon.svg" alt="">
+                        </div> -->
+                    </div>
                 </div>
                 
                 <div class="btn-salvar-container">

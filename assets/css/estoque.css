@@ -111,7 +111,8 @@
 
 #estoque-atencao-estatistica,
 #estoque-criticos-estatistica,
-#estoque-qtd-total-estatistica {
+#estoque-qtd-total,
+#estoque-qtd-total-pecas {
     color: #000;
     font-size: 1.125rem;
     font-weight: 900;

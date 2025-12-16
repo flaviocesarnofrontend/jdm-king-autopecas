@@ -343,7 +343,7 @@ function atualizarDashboard() {
 
     document.getElementById("estoque-atencao-estatistica").textContent = atencao;
     document.getElementById("estoque-criticos-estatistica").textContent = criticos;
-    document.getElementById("estoque-qtd-total-estatistica").textContent = totalQtd;
+    document.getElementById("estoque-qtd-total").textContent = totalQtd;
 
     // Gráfico
     atualizarGrafico(normal, atencao, criticos);

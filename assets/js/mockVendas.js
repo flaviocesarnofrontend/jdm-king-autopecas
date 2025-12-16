@@ -98,7 +98,7 @@ const vendasMock = [
     cpf: "001.123.456.78",
     total: 8 * 18.00,
     data: "12/11/2024"
-  }
+  },
 ];
 
 const estoqueMock = [
@@ -111,7 +111,6 @@ const estoqueMock = [
   { id: 7, nome: "Correia dentada", preco: 180.00, quantidade: 5 },
   { id: 8, nome: "Radiador", preco: 420.00, quantidade: 3 },
   { id: 9, nome: "Bateria automotiva 60Ah", preco: 480.00, quantidade: 2 },
-  { id: 10, nome: "Rebinboca da Parafuseta", preco: 18.00, quantidade: 20 }
 ];
 
  if(!localStorage.getItem("estoque")){

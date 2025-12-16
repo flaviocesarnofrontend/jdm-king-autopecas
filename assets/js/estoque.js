@@ -106,6 +106,9 @@ inputBusca.addEventListener("input", () => {
 // ===============================
 const STORAGE_KEY = "storage-estoque";
 
+//Edição - variável de controle
+let pecaEditando = null;
+
 // ===============================
 // UTILIDADES
 // ===============================
@@ -128,14 +131,52 @@ function formatarMoeda(valor) {
     });
 }
 
+//Regra que define a condição de cada status.
+//Para definir crítico, o estoque precisa estar abaixo de 50% do mínimo.
+//Para definir estoque normal, ele precisa ser superior a 30% do atencao. 
 function definirStatus(qtd, minimo) {
-    if (qtd <= 0 || qtd < minimo) {
+    if (qtd <= minimo * 0.5) {
         return { texto: "Crítico", classe: "cartao-status-peca-critico" };
     }
-    if (qtd === minimo) {
+
+    if (qtd <= minimo * 1.3) {
         return { texto: "Atenção", classe: "cartao-status-peca-atencao" };
     }
+
     return { texto: "Normal", classe: "cartao-status-peca-normal" };
+}
+
+// ===============================
+// EDIÇÃO
+// ===============================
+
+function abrirEdicao(id) {
+    const estoque = getEstoque();
+    pecaEditando = estoque.find(p => p.id == id);
+    if (!pecaEditando) return;
+
+    document.getElementById("nome-peca-nova").value = pecaEditando.nome;
+    document.getElementById("qtd-peca-nova").value = pecaEditando.quantidade;
+    document.getElementById("modal-qtd-minima-peca-nova").value = pecaEditando.minimo;
+    document.getElementById("modal-valor-unitario").value =
+        formatarValor(Math.round(pecaEditando.valorUnitario * 100));
+
+    openModal();
+}   
+
+// ===============================
+// EXCLUIR
+// ===============================
+
+function excluirPeca(id) {
+    if (!confirm("Deseja realmente excluir esta peça?")) return;
+
+    let estoque = getEstoque();
+    estoque = estoque.filter(p => p.id != id);
+
+    setEstoque(estoque);
+    renderizarEstoque();
+    atualizarDashboard();
 }
 
 // ===============================
@@ -160,10 +201,15 @@ function renderizarEstoque() {
                 <span class="cartao-codigo-peca">${peca.codigo}</span>
                 <span class="${status.classe}">${status.texto}</span>
                 <div class="cartao-botoes">
-                    <a href="#"><img src="../assets/img/estoque/edit-icon.svg" alt=""></a>
-                    <a href="#"><img src="../assets/img/estoque/delete-icon.svg" alt=""></a>
+                    <a href="#" class="btn-editar" data-id="${peca.id}">
+                        <img src="../assets/img/estoque/edit-icon.svg" alt="">
+                    </a>
+                    <a href="#" class="btn-excluir" data-id="${peca.id}">
+                        <img src="../assets/img/estoque/delete-icon.svg" alt="">
+                    </a>
                 </div>
             </div>
+            
 
             <div class="cartao-main">
                 <div class="cartao-dados">
@@ -195,6 +241,22 @@ function renderizarEstoque() {
     atualizarDashboard();
 }
 
+//Eventos dos botões (delegação correta)
+document.querySelector(".cartoes").addEventListener("click", (e) => {
+    const editar = e.target.closest(".btn-editar");
+    const excluir = e.target.closest(".btn-excluir");
+
+    if (editar) {
+        e.preventDefault();
+        abrirEdicao(editar.dataset.id);
+    }
+
+    if (excluir) {
+        e.preventDefault();
+        excluirPeca(excluir.dataset.id);
+    }
+});
+
 // ===============================
 // SALVAR NOVA PEÇA
 // ===============================
@@ -205,31 +267,44 @@ function salvarServico() {
     const valorTexto = document.getElementById("modal-valor-unitario").value;
 
     if (!nome || quantidade <= 0) {
-        alert("Preencha os campos obrigatórios corretamente.");
+        alert("Preencha os campos corretamente.");
         return;
     }
 
-    const valorUnitario = Number(
-        valorTexto.replace(/[^\d]/g, "")
-    ) / 100;
-
-    const novaPeca = {
-        id: Date.now(),
-        nome,
-        quantidade,
-        minimo,
-        valorUnitario,
-        codigo: gerarCodigo()
-    };
-
+    const valorUnitario = Number(valorTexto.replace(/\D/g, "")) / 100;
     const estoque = getEstoque();
-    estoque.unshift(novaPeca); // nova peça sempre primeiro
-    setEstoque(estoque);
 
-    renderizarEstoque(); // Renderiza a nova peça no estoque
+    if (pecaEditando) {
+        // ✏️ EDITAR
+        const index = estoque.findIndex(p => p.id === pecaEditando.id);
+        if (index !== -1) {
+            estoque[index] = {
+                ...estoque[index],
+                nome,
+                quantidade,
+                minimo,
+                valorUnitario
+            };
+        }
+        pecaEditando = null;
+    } else {
+        // ➕ NOVA PEÇA
+        estoque.unshift({
+            id: Date.now(),
+            nome,
+            quantidade,
+            minimo,
+            valorUnitario,
+            codigo: gerarCodigo()
+        });
+    }
+
+    setEstoque(estoque);
+    renderizarEstoque();
+    atualizarDashboard();
     closeModal();
 
-    // Limpa o formulário
+    // limpar form
     document.getElementById("nome-peca-nova").value = "";
     document.getElementById("qtd-peca-nova").value = "";
     document.getElementById("modal-qtd-minima-peca-nova").value = "";
@@ -247,9 +322,9 @@ function atualizarDashboard() {
     let normal = 0;
 
     estoque.forEach(item => {
-        if (item.quantidade < item.minimo) {
+        if (item.quantidade <= item.minimo * 0.5) {
             criticos++;
-        } else if (item.quantidade === item.minimo) {
+        } else if (item.quantidade <= item.minimo * 1.3) {
             atencao++;
         } else {
             normal++;

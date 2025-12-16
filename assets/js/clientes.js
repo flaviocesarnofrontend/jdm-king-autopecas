@@ -274,3 +274,15 @@ modal.addEventListener('click', (event) => {
     modal.close();
   }
 });
+
+document.addEventListener("DOMContentLoaded", () => {
+  const inputCpf = document.querySelector('input[name="cpf"]');
+  const inputTelefone = document.querySelector('input[name="telefone"]');
+
+  function apenasNumeros(event) {
+    event.target.value = event.target.value.replace(/\D/g, "");
+  }
+
+  inputCpf.addEventListener("input", apenasNumeros);
+  inputTelefone.addEventListener("input", apenasNumeros);
+});

@@ -83,6 +83,14 @@
                     </div>
                 </div>
             </div>
+            <div class="status-estoque-qtd-total-container">
+                <h2 class="status-estoque-titulo">Quantidade total</h2>
+                <div class="status-estoque-qtd-total-dashboard">
+                    <img src="../assets/img/estoque/caixa-qtd-total-preto.svg" alt="">
+                    <!-- <span id="estoque-criticos-estatistica">0</span> -->
+                    <span id="estoque-qtd-total-estatistica">0</span>
+                </div>
+            </div>
         </div>
         <input type="search" name="busca" id="busca" placeholder="Busque pelo nome da peça ou código">
         <div class="cartoes">
@@ -208,10 +216,12 @@
                 <div class="modal-botoes-container">
                     <button class="modal-botao-cancelar" onclick="closeModal()">Cancelar</button>
                     <button class="modal-botao-salvar" onclick="salvarServico()">Cadastrar peça</button>
+                    <!-- <button class="modal-botao-salvar" onclick="abrirNovaPeca()">Nova peça</button> -->
                 </div>
             </div>
         </div>
     </main>
+    <script src="../assets/js/mockEstoque.js"></script>
     <script src="../assets/js/estoque.js"></script>
 </body>
 </html>

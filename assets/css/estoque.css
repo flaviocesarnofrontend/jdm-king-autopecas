@@ -61,7 +61,8 @@
 
 .status-estoque-atencao-container,
 .status-estoque-criticos-container,
-.status-estoque-pizza-container {
+.status-estoque-pizza-container,
+.status-estoque-qtd-total-container {
     background-color: #D9D9D9;
     border-radius: var(--border-radius);
     padding: 18px 36px;
@@ -75,14 +76,16 @@
 
 .status-estoque-atencao-dashboard,
 .status-estoque-criticos-dashboard,
-.status-estoque-pizza-dashboard {
+.status-estoque-pizza-dashboard,
+.status-estoque-qtd-total-dashboard {
     margin-block-start: 12px;
     display: flex;
     align-items: center;
 }
 
 .status-estoque-atencao-dashboard,
-.status-estoque-criticos-dashboard {
+.status-estoque-criticos-dashboard,
+.status-estoque-qtd-total-dashboard {
     gap: 8px;
 }
 
@@ -102,8 +105,13 @@
     max-width: 270px;
 }
 
+.status-estoque-qtd-total-container {
+    max-width: 260px;
+}
+
 #estoque-atencao-estatistica,
-#estoque-criticos-estatistica {
+#estoque-criticos-estatistica,
+#estoque-qtd-total-estatistica {
     color: #000;
     font-size: 1.125rem;
     font-weight: 900;

@@ -101,22 +101,22 @@ const vendasMock = [
   },
 ];
 
-const estoqueMock = [
-  { id: 1, nome: "Óleo 15W40", preco: 120.00, quantidade: 10 },
-  { id: 2, nome: "Filtro de ar do motor", preco: 45.00, quantidade: 8 },
-  { id: 3, nome: "Fusivel 10am", preco: 1.00, quantidade: 50 },
-  { id: 4, nome: "Velas de ignição", preco: 140.00, quantidade: 6 },
-  { id: 5, nome: "Filtro de combustível", preco: 60.00, quantidade: 12 },
-  { id: 6, nome: "Amortecedor dianteiro", preco: 310.00, quantidade: 4 },
-  { id: 7, nome: "Correia dentada", preco: 180.00, quantidade: 5 },
-  { id: 8, nome: "Radiador", preco: 420.00, quantidade: 3 },
-  { id: 9, nome: "Bateria automotiva 60Ah", preco: 480.00, quantidade: 2 },
-];
+// const estoqueMock = [
+//   { id: 1, nome: "Óleo 15W40", preco: 120.00, quantidade: 10 },
+//   { id: 2, nome: "Filtro de ar do motor", preco: 45.00, quantidade: 8 },
+//   { id: 3, nome: "Fusivel 10am", preco: 1.00, quantidade: 50 },
+//   { id: 4, nome: "Velas de ignição", preco: 140.00, quantidade: 6 },
+//   { id: 5, nome: "Filtro de combustível", preco: 60.00, quantidade: 12 },
+//   { id: 6, nome: "Amortecedor dianteiro", preco: 310.00, quantidade: 4 },
+//   { id: 7, nome: "Correia dentada", preco: 180.00, quantidade: 5 },
+//   { id: 8, nome: "Radiador", preco: 420.00, quantidade: 3 },
+//   { id: 9, nome: "Bateria automotiva 60Ah", preco: 480.00, quantidade: 2 },
+// ];
 
- if(!localStorage.getItem("estoque")){
-   estoqueMock.forEach((d, index) => d.id = index + 1);
-   localStorage.setItem("estoque", JSON.stringify(estoqueMock));
- }
+//  if(!localStorage.getItem("estoque")){
+//    estoqueMock.forEach((d, index) => d.id = index + 1);
+//    localStorage.setItem("estoque", JSON.stringify(estoqueMock));
+//  }
 
 if(!localStorage.getItem("vendas")){
   vendasMock.forEach((c, index) => c.id = index + 1);

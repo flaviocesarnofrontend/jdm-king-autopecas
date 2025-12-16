@@ -17,9 +17,12 @@ function mascaraCPF(cpf) {
 
 const hojeFormat = () => new Date().toLocaleDateString("pt-BR");
 
-let estoque = JSON.parse(localStorage.getItem("estoque")) || [];
+const ESTOQUE_KEY = "storage-estoque";
+const VENDAS_KEY = "vendas";
+
+let estoque = JSON.parse(localStorage.getItem(ESTOQUE_KEY)) || [];
+let vendas = JSON.parse(localStorage.getItem(VENDAS_KEY)) || [];
 let clientes = JSON.parse(localStorage.getItem("clientes")) || [];
-let vendas = JSON.parse(localStorage.getItem("vendas")) || [];
 
 const modal = document.getElementById("modalNovaVendas");
 const btnNovaVenda = document.querySelector(".btn-novo-vendas");
@@ -40,12 +43,15 @@ document.getElementById("btnCancelarVenda").addEventListener("click", () => {
 function carregarPecas() {
   selectPeca.innerHTML = `<option value="">Selecione a peça</option>`;
 
-  estoque.forEach((p) => {
-    const op = document.createElement("option");
-    op.value = p.id;
-    op.textContent = `${p.nome} — ${moedaBr(p.preco)}`;
-    op.dataset.preco = p.preco;
-    selectPeca.appendChild(op);
+  estoque.forEach(p => {
+    if (p.quantidade > 0) {
+      const op = document.createElement("option");
+      op.value = p.id;
+      op.textContent = `${p.nome} (${p.quantidade} un.)`;
+      op.dataset.preco = p.valorUnitario;
+      op.dataset.qtd = p.quantidade;
+      selectPeca.appendChild(op);
+    }
   });
 }
 
@@ -64,8 +70,16 @@ function atualizarTotal() {
   const peca = selectPeca.selectedOptions[0];
   const qtd = Number(inputQtd.value) || 0;
 
-  if (!peca || !peca.dataset.preco) {
-    spanTotal.textContent = moedaBr(0);
+  if (!peca) {
+    spanTotal.textContent = "R$ 0,00";
+    return;
+  }
+
+  const estoqueDisponivel = Number(peca.dataset.qtd);
+
+  if (qtd > estoqueDisponivel) {
+    inputQtd.value = estoqueDisponivel;
+    alert("Quantidade maior que o estoque disponível!");
     return;
   }
 
@@ -76,40 +90,46 @@ function atualizarTotal() {
 selectPeca.addEventListener("change", atualizarTotal);
 inputQtd.addEventListener("input", atualizarTotal);
 
-document.getElementById("formNovaVendas").addEventListener("submit", (e) => {
+// ===============================
+// O coração da integração moda aqui
+// ===============================
+document.getElementById("formNovaVendas").addEventListener("submit", e => {
   e.preventDefault();
 
-  const idPeca = selectPeca.value;
-  const idCliente = selectCliente.value;
+  const idPeca = Number(selectPeca.value);
   const qtd = Number(inputQtd.value);
+  const idCliente = Number(selectCliente.value);
 
-  if (!idPeca || !idCliente || qtd <= 0) {
-    alert("Preencha todos os campos!");
+  const peca = estoque.find(p => p.id === idPeca);
+  const cliente = clientes.find(c => c.id === idCliente);
+
+  if (!peca || qtd <= 0 || qtd > peca.quantidade) {
+    alert("Venda inválida.");
     return;
   }
 
-  const pecaInfo = estoque.find((p) => p.id == idPeca);
-  const clienteInfo = clientes.find((c) => c.id == idCliente);
-
+  // Cria venda
   const venda = {
-    id: vendas.length + 1,
-    peca: pecaInfo.nome,
-    valorUnit: pecaInfo.preco,
+    id: Date.now(),
+    peca: peca.nome,
+    valorUnit: peca.valorUnitario,
     quantidade: qtd,
-    cliente: clienteInfo.nome,
-    cpf: clienteInfo.cpf,
-    total: qtd * pecaInfo.preco,
-    data: hojeFormat(),
+    cliente: cliente.nome,
+    cpf: cliente.cpf,
+    total: qtd * peca.valorUnitario,
+    data: hojeFormat()
   };
 
-  vendas.push(venda);
+  vendas.unshift(venda);
+  localStorage.setItem(VENDAS_KEY, JSON.stringify(vendas));
 
-  localStorage.setItem("vendas", JSON.stringify(vendas));
+  // 🔽 Atualiza estoque
+  peca.quantidade -= qtd;
+  localStorage.setItem(ESTOQUE_KEY, JSON.stringify(estoque));
 
-  alert("Venda registrada com sucesso!");
   modal.close();
-
   renderHistorico();
+  carregarPecas();
 });
 
 function renderHistorico() {

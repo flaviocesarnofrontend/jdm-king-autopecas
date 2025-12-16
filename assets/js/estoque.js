@@ -45,10 +45,14 @@ inputValor.addEventListener("blur", () => {
 //Modal
 
 function openModal() {
-  document.body.classList.remove("modal-close");
-  document.body.classList.add("modal-open");
-  const modal = document.getElementById("modal-nova-peca");
-  modal.style.display = "flex";
+    document.body.classList.remove("modal-close");
+    document.body.classList.add("modal-open");
+    const modal = document.getElementById("modal-nova-peca");
+    modal.style.display = "flex";
+
+    if (!pecaEditando && btnSalvar) {
+        btnSalvar.textContent = "Cadastrar peça";
+    }
 }
 
 function closeModal() {
@@ -104,7 +108,8 @@ inputBusca.addEventListener("input", () => {
 // ===============================
 // CONFIG LOCAL STORAGE
 // ===============================
-const STORAGE_KEY = "storage-estoque";
+// const STORAGE_KEY = "storage-estoque";
+// a referência foi transferida para o arquivo de mock.
 
 //Edição - variável de controle
 let pecaEditando = null;
@@ -132,8 +137,8 @@ function formatarMoeda(valor) {
 }
 
 //Regra que define a condição de cada status.
-//Para definir crítico, o estoque precisa estar abaixo de 50% do mínimo.
-//Para definir estoque normal, ele precisa ser superior a 30% do atencao. 
+//Para definir crítico, o estoque precisa estar igual OU abaixo de 50% do mínimo.
+//Para definir estoque normal, ele precisa ser igual ou superior a 30% do atencao. 
 function definirStatus(qtd, minimo) {
     if (qtd <= minimo * 0.5) {
         return { texto: "Crítico", classe: "cartao-status-peca-critico" };
@@ -161,6 +166,8 @@ function abrirEdicao(id) {
     document.getElementById("modal-valor-unitario").value =
         formatarValor(Math.round(pecaEditando.valorUnitario * 100));
 
+    
+    btnSalvar.textContent = "Salvar edição";
     openModal();
 }   
 
@@ -275,7 +282,7 @@ function salvarServico() {
     const estoque = getEstoque();
 
     if (pecaEditando) {
-        // ✏️ EDITAR
+        // EDITAR
         const index = estoque.findIndex(p => p.id === pecaEditando.id);
         if (index !== -1) {
             estoque[index] = {
@@ -288,7 +295,7 @@ function salvarServico() {
         }
         pecaEditando = null;
     } else {
-        // ➕ NOVA PEÇA
+        // NOVA PEÇA
         estoque.unshift({
             id: Date.now(),
             nome,
@@ -320,8 +327,11 @@ function atualizarDashboard() {
     let atencao = 0;
     let criticos = 0;
     let normal = 0;
+    let totalQtd = 0;
 
     estoque.forEach(item => {
+        totalQtd += item.quantidade;
+
         if (item.quantidade <= item.minimo * 0.5) {
             criticos++;
         } else if (item.quantidade <= item.minimo * 1.3) {
@@ -331,13 +341,14 @@ function atualizarDashboard() {
         }
     });
 
-    // Atualiza contadores
     document.getElementById("estoque-atencao-estatistica").textContent = atencao;
     document.getElementById("estoque-criticos-estatistica").textContent = criticos;
+    document.getElementById("estoque-qtd-total-estatistica").textContent = totalQtd;
 
-    // Atualiza gráfico
+    // Gráfico
     atualizarGrafico(normal, atencao, criticos);
 }
+
 
 // ===============================
 // ATUALIZAÇÃO DO GRÁFICO
@@ -385,6 +396,7 @@ function atualizarGrafico(normal, atencao, criticos) {
 // INICIALIZAÇÃO
 // ===============================
 document.addEventListener("DOMContentLoaded", () => {
+    btnSalvar = document.querySelector(".modal-botao-salvar");
     renderizarEstoque();
     atualizarDashboard();
 });
